@@ -12,7 +12,7 @@ export default class Count extends Component{
     render(){
         let { value, onIncreaseClick ,onDecreaseClick} = this.props
         return(
-            <div>
+            <div className="outer">
                 <h1>{value}</h1>
                 <Button.Group size={'large'}>
                     <Button type="primary" onClick={()=>onIncreaseClick()}>

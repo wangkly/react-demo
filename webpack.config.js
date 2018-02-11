@@ -25,6 +25,9 @@ module.exports={
 	},
 
     plugins:[
+        new ExtractTextPlugin({
+			filename: 'bundle-[name].css', disable: false, allChunks: true
+		}),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './index.ejs'
