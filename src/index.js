@@ -1,18 +1,34 @@
 import React,{Component} from 'react';
 import {render} from 'react-dom';
+import {createStore} from 'redux';
 
-export default class APP extends Component{ 
+import {Provider}from 'react-redux';
+
+import {countReducer} from './reducer';
+
+import Counter from './count';
+
+
+
+export default class APP extends Component{
+
     constructor(props){
         super(props);
     }
 
-    render() {
-		return (
-            <div>
-                <h1>{'react-demo'}</h1>
-            </div>
-		)
+    render(){
+        
+        let store = createStore(countReducer);
+        
+        return(
+            <Provider store={store} >
+                <Counter />
+            </Provider>
+        )
     }
+
+
 }
+
 
 render(<APP />, document.getElementById("react-content"));
