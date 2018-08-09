@@ -7,11 +7,12 @@ import {Provider}from 'react-redux';
 
 import {countReducer} from './reducer';
 
-import Counter from './count';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import APP from './app';
 
 
-
-export default class APP extends Component{
+export default class Index extends Component{
 
     constructor(props){
         super(props);
@@ -23,7 +24,26 @@ export default class APP extends Component{
         
         return(
             <Provider store={store} >
-                <Counter />
+                    <Router>
+                        <div>
+                        <ul>
+                            <li>
+                            <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                            <Link to="/about">About</Link>
+                            </li>
+                            <li>
+                            <Link to="/topics">Topics</Link>
+                            </li>
+                        </ul>
+
+                        <hr />
+
+                        <Route exact path="/" component={APP} />
+                        </div>
+                    </Router>
+
             </Provider>
         )
     }
@@ -32,4 +52,4 @@ export default class APP extends Component{
 }
 
 
-render(<APP />, document.getElementById("react-content"));
+render(<Index />, document.getElementById("react-content"));
