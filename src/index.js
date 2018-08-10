@@ -1,16 +1,12 @@
 import "./style/index.less"
 import React,{Component} from 'react';
 import {render} from 'react-dom';
-import {createStore} from 'redux';
-
 import {Provider}from 'react-redux';
-
-import {countReducer} from './reducer';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import APP from './app';
-
+import Counter from './count';
+import {store} from './store';
 
 export default class Index extends Component{
 
@@ -19,8 +15,6 @@ export default class Index extends Component{
     }
 
     render(){
-        
-        let store = createStore(countReducer);
         
         return(
             <Provider store={store} >
@@ -40,7 +34,7 @@ export default class Index extends Component{
 
                         <hr />
 
-                        <Route exact path="/" component={APP} />
+                        <Route exact path="/" component={Counter} />
                         </div>
                     </Router>
 

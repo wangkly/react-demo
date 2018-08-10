@@ -1,5 +1,5 @@
 exports.mapStateToProps=(state)=>{
     return{
-        value:state.count
+        value:state.countReducer.count
     }
 }
