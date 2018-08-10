@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Carousel } from 'antd';
-export default class FrontPage extends Component{
+export default class CarouselExample extends Component{
 
     constructor(props){
         super(props)
@@ -12,7 +12,7 @@ export default class FrontPage extends Component{
 
     render(){
         return(
-            <Carousel afterChange={()=>this.onChange} autoplay>
+            <Carousel afterChange={()=>this.onChange}>
                 <div><h3>1</h3></div>
                 <div><h3>2</h3></div>
                 <div><h3>3</h3></div>

@@ -5,9 +5,11 @@ import {createLogger} from "redux-logger";
 const logger = createLogger();
 
 import {countReducer} from './reducers/count_reducer';
+import {todoReducer} from './reducers/todo_reducer';
 
 const rootReducer = combineReducers({
-    countReducer
+    countReducer,
+    todoReducer
 })
 
 exports.store = createStore(rootReducer, applyMiddleware(thunk, logger));

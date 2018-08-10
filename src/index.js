@@ -8,8 +8,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyNavigator from './navigator';
 
 import Counter from './count';
-import FrontPage from './front-page';
-
+import CarouselExample from './carousel-example';
+import Todos from './todo';
 
 import {store} from './store';
 
@@ -26,8 +26,9 @@ export default class Index extends Component{
                     <Router>
                         <div>
                             <MyNavigator />
-                            <Route exact path="/" component={FrontPage} />
+                            <Route exact path="/" component={Todos} />
                             <Route exact path="/counter" component={Counter} />
+                            <Route exact path="/carousel" component={CarouselExample} />
                         </div>
                     </Router>
 

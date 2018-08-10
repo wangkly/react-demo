@@ -31,8 +31,8 @@ export default class MyNavigator extends Component{
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="app">
-                    <Link to="/counter">
-                    <Icon type="appstore" />appStore
+                    <Link to="/carousel">
+                    <Icon type="appstore" />Carousel
                     </Link>
                 </Menu.Item>
                 <SubMenu title={<span><Icon type="setting" />settings</span>}>
