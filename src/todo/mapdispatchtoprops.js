@@ -2,9 +2,11 @@ const add = { type: 'ADD' }
 const complete = { type: 'COMPLETE' }
 
 
-exports.mapDispatchToProps=()=>{
+exports.mapDispatchToProps=(dispatch,ownProps)=>{
+    console.log('mapDispatchToProps==>dispatch',dispatch); // state
+    console.log('mapDispatchToProps==>ownProps',ownProps); // undefined
     return{
-        addTodos:()=>dispatch(add),
-        completeTodos:()=>dispatch(complete)
+        addTodos:(param)=>dispatch(Object.assign(add,param)),
+        completeTodos:(param)=>dispatch(Object.assign(complete,param))
     }
 }

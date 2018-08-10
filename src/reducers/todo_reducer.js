@@ -1,28 +1,35 @@
 exports.todoReducer = (state={todos:[]},action)=>{
 
+    console.log('action==>',action)
+    console.log('state==>',state)
+    
     switch(action.type){
         case 'ADD':
-           return [
-               ...state.todos,
-               {
-                   id:action.id,
-                   text:action.text,
-                   complete:false
-               }
-           ] 
+           return Object.assign({},state,{todos:[
+            ...state.todos,
+            {
+                id:action.id,
+                text:action.text,
+                complete:false
+            }
+        ]})  
             break;
         case 'COMPLETE':
-           return 
-               let newState = state.todos.map(v=>{
-                    if(v.id == action.id){
-                        v.complete =true;
-                    }
-                    return v;
-               })
-               return newState;
+           return Object.assign({},state,{
+            todos:state.todos.map(v=>{
+                if(v.id == action.id){
+                    v.complete =true;
+                }
+                return v;
+                })
+
+           })
+               
         break;
         case 'DELETE':
-            return state.todos.filter(v=>v.id == action.id)
+            return Object.assign({},state,{
+                todos:state.todos.filter(v=>v.id == action.id)
+            })
         break;
         default:
         return state

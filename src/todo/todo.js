@@ -1,19 +1,32 @@
 import React,{Component} from 'react';
-import {Input, Button} from 'antd';
+import {Input, Button,Icon} from 'antd';
 
 export default class TODO extends Component{
 
+    constructor(props){
+        super(props);
+        this.state={
+            content:''
+        }
+    }
+
+    changeContent=(e)=>{
+        this.setState({
+            content:e.target.value||''
+        })
+    }
 
     render(){
         let {todos,addTodos,completeTodos} = this.props;
+        console.log('todos==>',todos)
         return(
             <div>
-                <span>你想要做什么？<Input style={{width:200}}/> <Button onClick={()=>addTodos()}>添加</Button></span>
+                <span>你想要做什么？<Input style={{width:200}} onChange={this.changeContent}/> <Button onClick={()=>addTodos({id:1,text:this.state.content,complete:false})}>添加</Button></span>
 
                <div>
                    {
                        todos && todos.map(todo =>{
-                            return <div> {todo.text} <Button onClick={()=>completeTodos()}>完成</Button></div>
+                            return <div> {todo.text} <Button onClick={()=>completeTodos({id:todo.id})}>完成</Button>{todo.complete ? <Icon type="check" /> :null}</div>
                        })
                    }
                 </div> 
