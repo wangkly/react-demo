@@ -7,7 +7,8 @@ exports.todoReducer = (state={todos:[]},action)=>{
         case 'ADD':
            return Object.assign({},state,{todos:[
             ...state.todos,
-            {
+            {   
+                key:Math.random(0,1000),
                 id:action.id,
                 text:action.text,
                 complete:false

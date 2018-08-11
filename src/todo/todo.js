@@ -21,12 +21,12 @@ export default class TODO extends Component{
         console.log('todos==>',todos)
         return(
             <div>
-                <span>你想要做什么？<Input style={{width:200}} onChange={this.changeContent}/> <Button onClick={()=>addTodos({id:1,text:this.state.content,complete:false})}>添加</Button></span>
+                <span>你想要做什么？<Input style={{width:200}} onChange={this.changeContent}/> <Button onClick={()=>addTodos({id:Math.random(0,1000),text:this.state.content,complete:false})}>添加</Button></span>
 
                <div>
                    {
                        todos && todos.map(todo =>{
-                            return <div> {todo.text} <Button onClick={()=>completeTodos({id:todo.id})}>完成</Button>{todo.complete ? <Icon type="check" /> :null}</div>
+                            return <div key={todo.key}> {todo.text} <Button onClick={()=>completeTodos({id:todo.id})}>完成</Button>{todo.complete ? <Icon type="check" /> :null}</div>
                        })
                    }
                 </div> 
