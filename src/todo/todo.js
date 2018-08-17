@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Input, Button,Icon} from 'antd';
-
+import PropTypes from 'prop-types';
 export default class TODO extends Component{
 
     constructor(props){
@@ -19,6 +19,7 @@ export default class TODO extends Component{
     render(){
         let {todos,addTodos,completeTodos} = this.props;
         console.log('todos==>',todos)
+        console.log(this.context.store)
         return(
             <div>
                 <span>你想要做什么？<Input style={{width:200}} onChange={this.changeContent}/> <Button onClick={()=>addTodos({id:Math.random(0,1000),text:this.state.content,complete:false})}>添加</Button></span>
@@ -35,3 +36,8 @@ export default class TODO extends Component{
     }
 
 }
+
+
+TODO.contextTypes = {
+    store: PropTypes.object
+  };

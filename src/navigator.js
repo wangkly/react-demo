@@ -46,7 +46,7 @@ export default class MyNavigator extends Component{
                     </MenuItemGroup>
                 </SubMenu>
                 <Menu.Item key="alipay">
-                    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">link</a>
+                <Link to="/counter">counter</Link>
                 </Menu.Item>
         </Menu>
         )
