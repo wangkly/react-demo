@@ -1,11 +1,11 @@
 var path =require('path');
-
+require("babel-polyfill");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports={
 
-    entry: './src/index.js',
+    entry: ["babel-polyfill",'./src/index.js'],
     output:{
         path: path.resolve(__dirname, 'dist'),
         filename:'bundle-[name].bundle.js'

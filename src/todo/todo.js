@@ -18,7 +18,7 @@ export default class TODO extends Component{
 
     render(){
         let {todos,addTodos,completeTodos} = this.props;
-        console.log('todos==>',todos)
+        console.log('this.props==>',this.props)
         console.log(this.context.store)
         return(
             <div>
