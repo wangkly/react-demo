@@ -10,6 +10,7 @@ import MyNavigator from './navigator';
 import Counter from './count';
 import CarouselExample from './carousel-example';
 import Todos from './todo';
+import Video from './video';
 
 import {store} from './store';
 
@@ -29,6 +30,7 @@ export default class Index extends Component{
                             <Route exact path="/" component={Todos} />
                             <Route exact path="/counter" component={Counter} />
                             <Route exact path="/carousel" component={CarouselExample} />
+                            <Route exact path="/video" component={Video} />
                         </div>
                     </Router>
 

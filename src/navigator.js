@@ -48,6 +48,10 @@ export default class MyNavigator extends Component{
                 <Menu.Item key="alipay">
                 <Link to="/counter">counter</Link>
                 </Menu.Item>
+
+                <Menu.Item key="video">
+                <Link to="/video">video</Link>
+                </Menu.Item>
         </Menu>
         )
     }
