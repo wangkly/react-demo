@@ -27,10 +27,14 @@ export default class Index extends Component{
                     <Router>
                         <div>
                             <MyNavigator />
-                            <Route exact path="/" component={Todos} />
-                            <Route exact path="/counter" component={Counter} />
-                            <Route exact path="/carousel" component={CarouselExample} />
-                            <Route exact path="/video" component={Video} />
+                            <div className="main-container">
+
+                                <Route exact path="/" component={Todos} />
+                                <Route exact path="/counter" component={Counter} />
+                                <Route exact path="/carousel" component={CarouselExample} />
+                                <Route exact path="/video" component={Video} />
+
+                            </div>
                         </div>
                     </Router>
 

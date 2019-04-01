@@ -12,7 +12,7 @@ export default class CarouselExample extends Component{
 
     render(){
         return(
-            <Carousel afterChange={()=>this.onChange}>
+            <Carousel autoplay afterChange={()=>this.onChange}>
                 <div><h3>1</h3></div>
                 <div><h3>2</h3></div>
                 <div><h3>3</h3></div>
