@@ -1,4 +1,5 @@
 import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
+import {HomeService} from 'services'
 
 function delay(){
     return new Promise((resolve)=>{
@@ -24,7 +25,7 @@ function delay(){
 }
 
 function* beforeAdd(action){
-    yield call(delay);
+    let result = yield call(HomeService({url:`http://www.localhost:3001/querydata`}));
     console.log('actionXXX==>',action)
     yield put(Object.assign({},{...action},{type:"ADD"}))
 }
