@@ -34,12 +34,12 @@ export default class MyNavigator extends Component{
                         mode="horizontal">
                             <Menu.Item key="home">
                                 <Link to="/">
-                                    <Icon type="home" />Home
+                                <Icon type="home" />Home
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="app">
-                                <Link to="/carousel">
-                                <Icon type="appstore" />Carousel
+                            <Menu.Item key="todo">
+                                <Link to="/todo">
+                                    <Icon type="appstore" />Todos
                                 </Link>
                             </Menu.Item>
                             <SubMenu title={<span><Icon type="setting" />settings</span>}>
