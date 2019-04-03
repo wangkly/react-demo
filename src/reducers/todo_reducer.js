@@ -1,7 +1,4 @@
 exports.todoReducer = (state={todos:[]},action)=>{
-
-    console.log('action==>',action)
-    console.log('state==>',state)
     
     switch(action.type){
         case 'ADD':

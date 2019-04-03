@@ -1,5 +1,6 @@
-import HomeService from './home-service';
+import {queryData,delay} from './home-service';
 
 export {
-    HomeService
+    queryData,
+    delay
 }
