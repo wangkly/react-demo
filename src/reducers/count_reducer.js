@@ -1,12 +1,16 @@
 //reducer
-exports.countReducer = (state={count:0},action)=>{
-    let count = state.count;
+import {Map} from 'immutable';
+const initialState=Map({
+    count:0
+})
+
+exports.countReducer = (state= initialState ,action)=>{
+    let count = state.get('count');
     switch(action.type){
         case 'increase':
-            return {count:count+=1};
+        return state.set('count',count+1);
         case 'decrease':
-        
-            return {count:count-=1};
+            return state.set('count',count-1)
         default:
             return state
 

@@ -1,5 +1,5 @@
 exports.mapStateToProps=(state)=>{
     return{
-        todos:state.todoReducer.todos
+        todos:state.getIn(['todoReducer','todos'])
     }
 }
