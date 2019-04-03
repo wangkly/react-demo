@@ -10,8 +10,6 @@ exports.queryData = function(param){
         })
     }
 
-
-
 exports.delay =function delay(){
     return new Promise((resolve)=>{
         setTimeout(

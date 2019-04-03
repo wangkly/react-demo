@@ -11,8 +11,10 @@ const logger = createLogger();
 
 import {countReducer} from './reducers/count_reducer';
 import {todoReducer} from './reducers/todo_reducer';
-
+import {HomeReducer} from './reducers/home-reducer';
+ 
 const rootReducer = combineReducers({
+    HomeReducer,
     countReducer,
     todoReducer
 })

@@ -22,7 +22,7 @@ export default class MyNavigator extends Component{
     render(){
         return(
             <div className="top">
-                <div className="top-menu">
+                <div className="top-menu clearfix">
                 <div className="logo">
                     <img src="/logo.png"  />
                 </div>

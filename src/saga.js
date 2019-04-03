@@ -8,8 +8,21 @@ function* beforeAdd(action){
     yield put(Object.assign({},{...action},{type:"ADD"}))
 }
 
+
+function* initBanner(){
+    let [banners,news] = yield [
+        call(queryData,{url:'init-banner'}),
+        call(queryData,{url:'init-news'})
+    ]
+    
+    yield put({type:'initBanners',payload:banners.res})
+    yield put({type:'initNews',payload:news.res.data})
+
+}
+
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
+    yield takeLatest('initBannerAndNews',initBanner)
 }
 
 // function* mySaga(){

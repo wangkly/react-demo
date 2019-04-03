@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyNavigator from './navigator';
 
 import Counter from './count';
-import CarouselExample from './carousel-example';
+import Home from './home-page';
 import Todos from './todo';
 import Video from './video';
 
@@ -29,7 +29,7 @@ export default class Index extends Component{
                             <MyNavigator />
                             <div className="main-container">
 
-                                <Route exact path="/" component={CarouselExample} />
+                                <Route exact path="/" component={Home} />
                                 <Route exact path="/todo" component={Todos} />
                                 <Route exact path="/counter" component={Counter} />
                                 <Route exact path="/video" component={Video} />
