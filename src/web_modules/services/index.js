@@ -1,6 +1,7 @@
-import {queryData,delay} from './home-service';
+import {queryData,delay,postTest} from './query-service';
 
 export {
     queryData,
-    delay
+    delay,
+    postTest
 }

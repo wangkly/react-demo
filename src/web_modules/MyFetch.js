@@ -53,7 +53,7 @@ const defaultOrigin='http://localhost:3001';
         credentials:'include',
         headers:{
             Accept: 'application/json; charset=utf-8',
-        //     'Content-type':'application/json'
+            'Content-Type': 'application/json'
         }
     }
 

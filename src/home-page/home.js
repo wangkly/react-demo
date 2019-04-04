@@ -19,17 +19,19 @@ export default class Home extends Component{
     render(){
         let {banners} = this.props;
         return(
-            <div className="banner">
-                <Carousel  afterChange={()=>this.onChange} >
-                    {
-                        banners.map((banner)=>{
-                            return(<div   key={banner.id}>
-                                <span>{banner.context}</span>
-                                {/* <a href={`/${banner.href}`} target="_blank">click me</a> */}
-                            </div>) 
-                        })
-                    }
-                </Carousel>
+            <div>
+                <div className="banner">
+                    <Carousel  afterChange={()=>this.onChange} >
+                        {
+                            banners.map((banner)=>{
+                                return(<div   key={banner.id}>
+                                    <span>{banner.context}</span>
+                                    {/* <a href={`/${banner.href}`} target="_blank">click me</a> */}
+                                </div>) 
+                            })
+                        }
+                    </Carousel>
+                </div>
 
                <News {...this.props}/>     
 

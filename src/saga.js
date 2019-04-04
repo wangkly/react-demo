@@ -1,11 +1,13 @@
 import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
-import {queryData,delay} from 'services'
+import {queryData,delay,postTest} from 'services';
+// import MyFetch from 'myfetch';
+
 
 function* beforeAdd(action){
-    // yield call(delay);
-    let resp =yield call(queryData,{url:`querydata`});
+    let resp = yield call(postTest,action);
+    // let resp =yield call(queryData,{url:`querydata`});
     console.log('sage query **',resp);
-    yield put(Object.assign({},{...action},{type:"ADD"}))
+    yield put(Object.assign({},{...resp},{type:"ADD"}))
 }
 
 
