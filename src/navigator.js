@@ -62,7 +62,7 @@ export default class MyNavigator extends Component{
                     </Menu>
                 </div>
                 <div className="opt-btn">
-                    <a>登录</a>&nbsp;/&nbsp;<a>注册</a>
+                    <a>登录</a>&nbsp;/&nbsp;<Link to="/regist">注册</Link>
                 </div>
                 <div className="top-search">
                     <Search 

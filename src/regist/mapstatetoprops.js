@@ -1,0 +1,5 @@
+exports.mapStateToProps = (state)=>{
+    return{
+        
+    }
+}

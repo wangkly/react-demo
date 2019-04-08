@@ -1,5 +1,5 @@
 import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
-import {queryData,delay,postTest} from 'services';
+import {queryData,delay,postTest,regist} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -22,9 +22,20 @@ function* initBanner(){
 
 }
 
+
+function* registAccount(action){
+    let resp = yield call(regist,action);
+    action.callback && action.callback(resp)
+
+}
+
+
+
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
-    yield takeLatest('initBannerAndNews',initBanner)
+    yield takeLatest('initBannerAndNews',initBanner);
+    yield takeLatest('REGIST',registAccount);
+
 }
 
 // function* mySaga(){

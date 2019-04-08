@@ -11,6 +11,7 @@ import Counter from './count';
 import Home from './home-page';
 import Todos from './todo';
 import Video from './video';
+import Regist from './regist';
 
 import {store} from './store';
 
@@ -33,6 +34,7 @@ export default class Index extends Component{
                                 <Route exact path="/todo" component={Todos} />
                                 <Route exact path="/counter" component={Counter} />
                                 <Route exact path="/video" component={Video} />
+                                <Route exact path="/regist" component={Regist} />
 
                             </div>
                         </div>
