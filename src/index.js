@@ -12,6 +12,7 @@ import Home from './home-page';
 import Todos from './todo';
 import Video from './video';
 import Regist from './regist';
+import Login from './login';
 
 import {store} from './store';
 
@@ -28,15 +29,14 @@ export default class Index extends Component{
                     <Router>
                         <div>
                             <MyNavigator />
-                            <div className="main-container">
 
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/todo" component={Todos} />
                                 <Route exact path="/counter" component={Counter} />
                                 <Route exact path="/video" component={Video} />
                                 <Route exact path="/regist" component={Regist} />
+                                <Route exact path="/login" component={Login} />
 
-                            </div>
                         </div>
                     </Router>
 

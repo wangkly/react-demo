@@ -31,6 +31,7 @@ class Regist extends Component{
           };
 
         return(
+            <div className="regist-container">
                 <Form className="regist-form" onSubmit={this.handleFormSubmit} style={{'margin':'auto','marginTop':100}}>
                     <Form.Item label="邮箱地址" {...formItemLayout}>
                         {
@@ -80,6 +81,7 @@ class Regist extends Component{
                     </Form.Item>     
 
                 </Form>
+            </div>
         )
     }
 

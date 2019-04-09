@@ -19,7 +19,7 @@ export default class Home extends Component{
     render(){
         let {banners} = this.props;
         return(
-            <div>
+            <div className="main-container">
                 <div className="banner">
                     <Carousel  afterChange={()=>this.onChange} >
                         {

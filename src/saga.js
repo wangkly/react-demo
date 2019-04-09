@@ -1,5 +1,5 @@
 import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
-import {queryData,delay,postTest,regist} from 'services';
+import {queryData,delay,postTest,regist,login} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -29,12 +29,18 @@ function* registAccount(action){
 
 }
 
+function* userLogin(action){
+    console.log('userLogin **',action)
+    let resp = yield call(login,action);
+}
+
 
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
     yield takeLatest('initBannerAndNews',initBanner);
     yield takeLatest('REGIST',registAccount);
+    yield takeLatest('LOGIN',userLogin);
 
 }
 

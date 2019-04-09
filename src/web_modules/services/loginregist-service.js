@@ -7,3 +7,12 @@ exports.regist=(param)=>{
         })
     })
 }
+
+
+exports.login=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'login',method:'POST',body:param}).then((resp)=>{
+            resolve(resp)
+        })
+    })
+}
