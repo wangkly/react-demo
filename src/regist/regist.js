@@ -32,7 +32,8 @@ class Regist extends Component{
 
         return(
             <div className="regist-container">
-                <Form className="regist-form" onSubmit={this.handleFormSubmit} style={{'margin':'auto','marginTop':100}}>
+            <div className="regist-form">
+                <Form  onSubmit={this.handleFormSubmit} style={{'margin':'auto','marginTop':100}}>
                     <Form.Item label="邮箱地址" {...formItemLayout}>
                         {
                             getFieldDecorator('email',{
@@ -76,11 +77,13 @@ class Regist extends Component{
                         }
                     </Form.Item>  
 
-                    <Form.Item {...tailFormItemLayout}>
+                    <Form.Item >
                         <Button type="primary" htmlType="submit">注册</Button>    
                     </Form.Item>     
 
                 </Form>
+
+            </div>
             </div>
         )
     }
@@ -109,7 +112,7 @@ class Regist extends Component{
         if(!err){
             message.success('注册成功');
             setTimeout(()=>{
-                this.props.history.push("/");
+                this.props.history.push("/login");
             },2000)
         }else{
             message.error('注册失败');
