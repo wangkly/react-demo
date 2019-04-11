@@ -13,6 +13,7 @@ import Todos from './todo';
 import Video from './video';
 import Regist from './regist';
 import Login from './login';
+import Editor from './editor';
 
 import {store} from './store';
 
@@ -36,6 +37,7 @@ export default class Index extends Component{
                                 <Route exact path="/video" component={Video} />
                                 <Route exact path="/regist" component={Regist} />
                                 <Route exact path="/login" component={Login} />
+                                <Route exact path="/editor" component={Editor} />
 
                         </div>
                     </Router>

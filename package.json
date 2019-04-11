@@ -10,6 +10,7 @@
   "author": "wangkly",
   "license": "ISC",
   "dependencies": {
+    "braft-editor": "^2.2.9",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

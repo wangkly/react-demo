@@ -44,7 +44,11 @@ export default class MyNavigator extends Component{
                             </Menu.Item>
                             <SubMenu title={<span><Icon type="setting" />settings</span>}>
                                 <MenuItemGroup title="Item 1">
-                                    <Menu.Item key="setting:1">Option 1</Menu.Item>
+                                    <Menu.Item key="setting:1">
+                                        <Link to="/editor">
+                                            EditorDemo
+                                        </Link>
+                                    </Menu.Item>
                                     <Menu.Item key="setting:2">Option 2</Menu.Item>
                                 </MenuItemGroup>
                                 <MenuItemGroup title="Item 2">
