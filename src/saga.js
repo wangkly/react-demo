@@ -1,5 +1,5 @@
 import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
-import {queryData,delay,postTest,regist,login} from 'services';
+import {queryData,delay,postTest,regist,login,saveArticle} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -16,7 +16,6 @@ function* initBanner(){
         call(queryData,{url:'init-banner'}),
         call(queryData,{url:'init-news'})
     ]
-    
     yield put({type:'initBanners',payload:banners.res})
     yield put({type:'initNews',payload:news.res.data})
 
@@ -30,8 +29,14 @@ function* registAccount(action){
 }
 
 function* userLogin(action){
-    console.log('userLogin **',action)
     let resp = yield call(login,action);
+    action.callback && action.callback(resp)
+
+}
+
+function* saveContent(action){
+    let resp = yield call(saveArticle,action);
+    action.callback && action.callback(resp)
 }
 
 
@@ -41,6 +46,7 @@ function* mySaga(){
     yield takeLatest('initBannerAndNews',initBanner);
     yield takeLatest('REGIST',registAccount);
     yield takeLatest('LOGIN',userLogin);
+    yield takeLatest('SAVECONTENT',saveContent);
 
 }
 

@@ -18,16 +18,18 @@ class FormDemo extends React.Component {
   }
 
   handleSubmit = (event) => {
-
+    let {saveContent} = this.props;
     event.preventDefault()
-
     this.props.form.validateFields((error, values) => {
       if (!error) {
         const submitData = {
           title: values.title,
-          content: values.content.toRAW() // or values.content.toHTML()
+          content: values.content.toHTML() // or values.content.toRAW()
         }
         console.log(submitData)
+
+        saveContent(submitData)
+
       }
     })
 

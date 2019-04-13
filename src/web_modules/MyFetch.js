@@ -26,18 +26,14 @@ const defaultOrigin='http://localhost:3001';
         fetch(url,option).then((response)=>{
             clearTimeout(timeErr);
             if(!response.ok){
-               throw new Error('Network response was not ok.');
+               throw new Error(response.statusText);
             }
-            // if(response.headers.get("content-type") === "application/json"){
                 return response.json();
-            // }else{
-            //     throw new Error('response expect be json.');
-            // }
         }).then((json)=>{
             return resolve({res:json,err:null})
         }).catch((err)=>{
             clearTimeout(timeErr);
-            reject({res:{},err:err})
+            resolve({res:{},err:err})
         })
     })
  }

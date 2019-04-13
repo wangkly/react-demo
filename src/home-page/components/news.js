@@ -6,7 +6,7 @@ export default class News extends Component{
 
     render(){
         let {news} = this.props;
-
+        console.log(news)
         return(
             <div className="bottom-area">
                 <Row >
@@ -19,8 +19,8 @@ export default class News extends Component{
                                 style={{ margin: 10  }}
                                 cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
                                 <Meta
-                                title="Europe Street beat"
-                                description="www.instagram.com"
+                                title={item.title}
+                                description={item.content}
                                 />
                             </Card>
                             </Col>

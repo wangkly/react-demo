@@ -109,13 +109,13 @@ class Regist extends Component{
 
     callback=(result)=>{
         let {err,res} = result;
-        if(!err){
+        if(!err && res.success){
             message.success('注册成功');
             setTimeout(()=>{
                 this.props.history.push("/login");
             },2000)
         }else{
-            message.error('注册失败');
+            message.error(`注册失败:${res.errMsg}`);
         }
 
         console.log('callback ** result',result)
@@ -134,9 +134,7 @@ class Regist extends Component{
            
             values.callback = this.callback;
 
-           let resp =  regist(values);
-
-           console.log('handleFormSubmit *** resp',resp)
+            regist(values);
         })
 
     }

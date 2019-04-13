@@ -1,5 +1,6 @@
 exports.mapDispatchToProps = (dispatch)=>{
     return{
-        login:(param)=>dispatch(Object.assign({type:'LOGIN'},{...param}))
+        saveContent:(param)=>dispatch(Object.assign({type:'SAVECONTENT'},{...param}))
+
     }
 }

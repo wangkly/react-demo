@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Input,Form,Button} from 'antd';
+import {Input,Form,Button,message} from 'antd';
 
 class Login extends Component{
 
@@ -53,6 +53,20 @@ class Login extends Component{
     }
 
 
+    callback=(result)=>{
+        let {err,res} = result;
+        if(!err && res.success){
+            message.success('登录成功');
+            setTimeout(()=>{
+                this.props.history.push("/home");
+            },2000)
+        }else{
+            message.error(`登录失败:${res.errMsg}`);
+        }
+
+    }
+
+
     handleFormSubmit= (e)=>{
         e.preventDefault();
         let {login} = this.props;
@@ -61,9 +75,8 @@ class Login extends Component{
                     console.log('err: ', err);    
                     return;
                 }
-            console.log('Received values of form: ', values);    
            
-
+            values.callback = this.callback;
             login(values);
 
         })
