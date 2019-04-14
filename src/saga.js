@@ -1,5 +1,5 @@
 import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
-import {queryData,delay,postTest,regist,login,saveArticle} from 'services';
+import {queryData,delay,postTest,regist,login,saveArticle,getArticle} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -40,6 +40,12 @@ function* saveContent(action){
 }
 
 
+function* getArticleById(action){
+    let resp = yield call(getArticle,action);
+    yield put({type:'article-init',payload:resp.res.data})
+
+}
+
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
@@ -47,6 +53,7 @@ function* mySaga(){
     yield takeLatest('REGIST',registAccount);
     yield takeLatest('LOGIN',userLogin);
     yield takeLatest('SAVECONTENT',saveContent);
+    yield takeLatest('GET-ARTICLE',getArticleById);
 
 }
 

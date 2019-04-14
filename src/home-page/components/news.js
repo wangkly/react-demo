@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import {Card,Row,Col} from 'antd';
 const { Meta } = Card;
+import {withRouter} from "react-router-dom";
 
-export default class News extends Component{
+ class News extends Component{
 
     render(){
         let {news} = this.props;
@@ -13,9 +14,10 @@ export default class News extends Component{
                 {
                     news.map((item)=>{
                         return(
-                            <Col span={6} key={item.id}>
+                            <Col span={6} key={item._id}>
                             <Card
                                 hoverable
+                                onClick={()=>this.goToArticle(item._id)}
                                 style={{ margin: 10  }}
                                 cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
                                 <Meta
@@ -34,5 +36,11 @@ export default class News extends Component{
         )
     }
 
+    goToArticle=(aid)=>{
+            console.log('goToArticle ***',aid)
+            this.props.history.push(`/article/${aid}`);
+    }
 
 }
+
+export default withRouter(News)

@@ -15,6 +15,8 @@ import Regist from './regist';
 import Login from './login';
 import Editor from './editor';
 
+import Article from './article';
+
 import {store} from './store';
 
 export default class Index extends Component{
@@ -38,7 +40,7 @@ export default class Index extends Component{
                                 <Route exact path="/regist" component={Regist} />
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/editor" component={Editor} />
-
+                                <Route exact path="/article/:aid" component={Article} />
                         </div>
                     </Router>
 

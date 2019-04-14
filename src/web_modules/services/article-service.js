@@ -7,3 +7,12 @@ exports.saveArticle = (param)=>{
         })
     })
 }
+
+
+exports.getArticle = (param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'getArticle',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}

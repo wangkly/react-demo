@@ -8,7 +8,8 @@ module.exports={
     entry: ["babel-polyfill",'./src/index.js'],
     output:{
         path: path.resolve(__dirname, 'dist'),
-        filename:'bundle-[name].bundle.js'
+        filename:'bundle-[name].bundle.js',
+        publicPath:'http://localhost:3000/'
     },
 
     module:{
