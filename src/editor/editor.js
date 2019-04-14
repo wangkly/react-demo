@@ -81,6 +81,7 @@ class FormDemo extends React.Component {
               <BraftEditor
                 className="my-editor"
                 controls={controls}
+                media={{uploadFn:this.myUploadFn}}
                 placeholder="请输入正文内容"
               />
             )}
@@ -91,6 +92,41 @@ class FormDemo extends React.Component {
         </Form>
       </div>
     )
+
+  }
+
+  myUploadFn = (param)=>{
+    let uploadUrl = 'http://localhost:3001/upload';
+    let xhr = new XMLHttpRequest();
+    let form = new FormData();
+
+    let uploadComplete =(response)=>{
+      console.log('uploadcomplete ***',xhr.response)
+      let result = JSON.parse(xhr.response||{});
+      param.success({
+        url:result.data
+      })
+    }
+
+    let uploadFailed =(response)=>{
+      param.error({
+        msg:'upload failed'
+      })
+    }
+
+    let onProgress =(event)=>{
+      console.log('onProgress *** event',event)
+        param.progress(event.loaded / event.total * 100)
+    }
+
+    form.append('file', param.file);
+    xhr.open('POST',uploadUrl,true)
+    xhr.onload = uploadComplete;
+    xhr.onerror = uploadFailed;
+    xhr.upload.onprogress = onProgress;
+
+    xhr.send(form);
+    console.log('myUploadFn param ***',param)
 
   }
 
