@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-
+import BraftEditor from 'braft-editor'
 import {Row,Col,Button} from 'antd';
-
+import 'braft-editor/dist/output.css'
 
 export default class Article extends Component{
 
@@ -17,13 +17,12 @@ export default class Article extends Component{
 
         let {article} = this.props;
         console.log('render article **',article)
-
+        let  editorState = BraftEditor.createEditorState(article.content);
+        let htmlString = editorState.toHTML()
         return(
             <div className="article-container">
-                <Row><h1>{article.title}</h1></Row>
-                <Row>
-                <div dangerouslySetInnerHTML={{__html: article.content }}></div>  
-                </Row>
+                <div className="article-title"><h1>{article.title}</h1></div>
+                <div  className="braft-output-content" dangerouslySetInnerHTML={{__html: htmlString }}></div>  
             </div>
         )
 

@@ -34,6 +34,7 @@ export default class Index extends Component{
                             <MyNavigator />
 
                                 <Route exact path="/" component={Home} />
+                                <Route exact path="/home" component={Home} />
                                 <Route exact path="/todo" component={Todos} />
                                 <Route exact path="/counter" component={Counter} />
                                 <Route exact path="/video" component={Video} />

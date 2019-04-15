@@ -1,7 +1,7 @@
 import React from 'react'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button ,message} from 'antd'
 const FormItem = Form.Item;
 
 class FormDemo extends React.Component {
@@ -11,7 +11,7 @@ class FormDemo extends React.Component {
     // 异步设置编辑器内容
     setTimeout(() => {
       this.props.form.setFieldsValue({
-        content: BraftEditor.createEditorState('<p>Hello <b>World!</b></p>')
+        content: BraftEditor.createEditorState(null)
       })
     }, 1000)
 
@@ -19,12 +19,14 @@ class FormDemo extends React.Component {
 
   handleSubmit = (event) => {
     let {saveContent} = this.props;
+    let thar = this;
     event.preventDefault()
     this.props.form.validateFields((error, values) => {
       if (!error) {
         const submitData = {
           title: values.title,
-          content: values.content.toHTML() // or values.content.toRAW()
+          content: values.content.toRAW(), // or values.content.toHTML() 
+          callback:thar.callback
         }
         console.log(submitData)
 
@@ -32,8 +34,18 @@ class FormDemo extends React.Component {
 
       }
     })
-
   }
+
+  callback =(resp)=>{
+    let {err,res} = resp;
+    if(!err && res.success){
+      message.success('发布成功');
+    }else{
+      message.error(`${res.errMsg}`)
+    }
+  }
+
+
 
   render () {
 
@@ -50,6 +62,15 @@ class FormDemo extends React.Component {
           sm: { span: 16 },
         },
       };
+
+      const extendControls = [
+        {
+          key: 'custom-button',
+          type: 'button',
+          text: '预览',
+          onClick: this.preview
+        }
+      ] 
 
     return (
       <div className="editor-container">
@@ -80,7 +101,8 @@ class FormDemo extends React.Component {
             })(
               <BraftEditor
                 className="my-editor"
-                controls={controls}
+                // controls={controls}
+                extendControls={extendControls}
                 media={{uploadFn:this.myUploadFn}}
                 placeholder="请输入正文内容"
               />
@@ -92,6 +114,21 @@ class FormDemo extends React.Component {
         </Form>
       </div>
     )
+
+  }
+
+
+  preview = ()=>{
+    const form = this.props.form;
+    let content = form.getFieldValue('content');
+
+    if (window.previewWindow) {
+      window.previewWindow.close()
+    }
+
+    window.previewWindow = window.open()
+    window.previewWindow.document.write(content.toHTML())
+    window.previewWindow.document.close()
 
   }
 

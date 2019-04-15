@@ -61,7 +61,7 @@
           ctx.beginPath();
           //注释内容为鼠标焦点的地方圆圈半径变化
           //this.r = (this.r < 14 && this.r > 1) ? this.r + (Math.random() * 2 - 1) : 2;
-          this.r = 8;
+          this.r = 4;
           ctx.arc(this.x, this.y, this.r, 0, 360);
           ctx.closePath();
           //ctx.fillStyle = 'rgba(0,0,0,' + (parseInt(Math.random() * 100) / 100) + ')'
@@ -106,7 +106,7 @@
         draw();
       }
     
-      window.addEventListener('load', init(90));
+      window.addEventListener('load', init(50));
     
       window.onmousemove = function(e) {
         e = e || window.event;

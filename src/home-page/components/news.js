@@ -22,7 +22,7 @@ import {withRouter} from "react-router-dom";
                                 cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
                                 <Meta
                                 title={item.title}
-                                description={item.content}
+                                // description={item.content}
                                 />
                             </Card>
                             </Col>
