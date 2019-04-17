@@ -7,7 +7,6 @@ import {withRouter} from "react-router-dom";
 
     render(){
         let {news} = this.props;
-        console.log(news)
         return(
             <div className="bottom-area">
                 <Row >
@@ -19,7 +18,7 @@ import {withRouter} from "react-router-dom";
                                 hoverable
                                 onClick={()=>this.goToArticle(item._id)}
                                 style={{ margin: 10  }}
-                                cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
+                                cover={<img alt="example" src={item.cover || "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"} />}>
                                 <Meta
                                 title={item.title}
                                 // description={item.content}

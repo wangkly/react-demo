@@ -6,6 +6,14 @@ const FormItem = Form.Item;
 
 class FormDemo extends React.Component {
 
+
+  constructor(props){
+    super(props)
+    this.state={
+      cover:''
+    }
+  }
+
   componentDidMount () {
 
     // 异步设置编辑器内容
@@ -24,6 +32,7 @@ class FormDemo extends React.Component {
     this.props.form.validateFields((error, values) => {
       if (!error) {
         const submitData = {
+          cover:thar.state.cover,
           title: values.title,
           content: values.content.toRAW(), // or values.content.toHTML() 
           callback:thar.callback
@@ -136,13 +145,22 @@ class FormDemo extends React.Component {
     let uploadUrl = 'http://localhost:3001/upload';
     let xhr = new XMLHttpRequest();
     let form = new FormData();
-
+    let thar = this;
     let uploadComplete =(response)=>{
+
       console.log('uploadcomplete ***',xhr.response)
       let result = JSON.parse(xhr.response||{});
+
       param.success({
         url:result.data
       })
+
+      if(!thar.state.cover){
+        thar.setState({
+          cover:result.data
+        })
+        
+      }
     }
 
     let uploadFailed =(response)=>{
@@ -152,7 +170,7 @@ class FormDemo extends React.Component {
     }
 
     let onProgress =(event)=>{
-      console.log('onProgress *** event',event)
+      // console.log('onProgress *** event',event)
         param.progress(event.loaded / event.total * 100)
     }
 
@@ -163,7 +181,7 @@ class FormDemo extends React.Component {
     xhr.upload.onprogress = onProgress;
 
     xhr.send(form);
-    console.log('myUploadFn param ***',param)
+    // console.log('myUploadFn param ***',param)
 
   }
 

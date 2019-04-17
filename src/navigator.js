@@ -4,14 +4,39 @@ import {Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const Search = Input.Search;
+import PropTypes from 'prop-types';
+import MyFetch from 'myfetch';
 
 export default class MyNavigator extends Component{
     constructor(props){
         super(props);
         this.state = {
             current: 'home',
+            login:false,
+            userInfo:{}
           }
     }
+
+
+    componentDidMount(){
+        //检查登录状态
+        console.log(this.context.store)
+
+        MyFetch({url:'checkIfLogin'}).then((resp)=>{
+            let {err,res} = resp;
+            if(!err && res.success){
+                //用户已登录
+                this.setState({
+                    login:true,
+                    userInfo:res.data
+                })
+            }else{
+                //用户未登录
+
+            }
+        })
+    }
+
 
     handleClick = (e) => {
         this.setState({
@@ -20,6 +45,7 @@ export default class MyNavigator extends Component{
       }
 
     render(){
+        let {login,userInfo} = this.state;
         return(
             <div className="top">
                 <div className="top-menu clearfix">
@@ -72,9 +98,18 @@ export default class MyNavigator extends Component{
                         style={{ width: 200 }}
                     />  
                 </div>
-                <div className="opt-btn">
-                    <Link to="/login">登录</Link>&nbsp;/&nbsp;<Link to="/regist">注册</Link>
-                </div>
+                {
+                    login ?
+                    <div className="user-photo">
+                    <Link to="/login">
+                        <img src= {userInfo.headImg||'https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png'}/>
+                    </Link>
+                    </div>
+                    :
+                    <div className="opt-btn">
+                        <Link to="/login">登录</Link>&nbsp;/&nbsp;<Link to="/regist">注册</Link>
+                    </div>
+                }
                 </div>
             </div>
         )
@@ -82,3 +117,7 @@ export default class MyNavigator extends Component{
 
 
 }
+
+MyNavigator.contextTypes = {
+    store: PropTypes.object
+  };
