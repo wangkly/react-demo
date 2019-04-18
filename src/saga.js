@@ -1,4 +1,4 @@
-import {call,put,takeEvery,takeLatest} from 'redux-saga/effects';
+import {call,put,takeEvery,takeLatest,select} from 'redux-saga/effects';
 import {queryData,delay,postTest,regist,login,saveArticle,getArticle} from 'services';
 // import MyFetch from 'myfetch';
 
@@ -12,13 +12,26 @@ function* beforeAdd(action){
 
 
 function* initBanner(){
-    let [banners,news] = yield [
-        call(queryData,{url:'init-banner'}),
-        call(queryData,{url:'init-news'})
-    ]
+    let banners = yield call(queryData,{url:'init-banner'});
     yield put({type:'initBanners',payload:banners.res})
-    yield put({type:'initNews',payload:news.res.data})
+}
 
+
+function* initContents(){
+    let state = yield select();
+    let pageInfo = state.getIn(['HomeReducer','pageInfo'])||{};
+    let stateNews = state.getIn(['HomeReducer','news'])||[];
+    let resp = yield call(queryData,{url:'init-news',body:pageInfo,method:'POST'});
+    
+    let {err,res} = resp;
+    if(!err && res.success){
+        stateNews = stateNews.concat(res.data);
+        yield put({type:'initNews',payload:stateNews})
+        if(res.data.length > 0){
+            pageInfo.pageNo +=1;
+            yield put({type:"setPageInfo",payload:pageInfo })
+        }
+    }
 }
 
 
@@ -49,7 +62,8 @@ function* getArticleById(action){
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
-    yield takeLatest('initBannerAndNews',initBanner);
+    yield takeLatest('initBanner',initBanner);
+    yield takeLatest('initContents',initContents);
     yield takeLatest('REGIST',registAccount);
     yield takeLatest('LOGIN',userLogin);
     yield takeLatest('SAVECONTENT',saveContent);

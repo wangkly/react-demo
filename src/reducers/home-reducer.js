@@ -2,7 +2,11 @@ import {List,Map,fromJS} from 'immutable';
 
 const initialState = Map({
     banners:[],
-    news:[]
+    news:[],
+    pageInfo:{
+        pageNo:0,
+        pageSize:10
+    }   
 })
 
 exports.HomeReducer = (state = initialState,action)=>{
@@ -16,6 +20,9 @@ exports.HomeReducer = (state = initialState,action)=>{
             let news = action.payload;
             return state.set('news',news)
         break;
+
+        case 'setPageInfo':
+            return state.set('pageInfo',action.payload);
 
         default:
             return state

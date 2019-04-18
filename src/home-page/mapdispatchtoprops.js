@@ -2,6 +2,8 @@
 
 exports.mapDispatchToProps = (dispath,ownProps)=>{
     return{
-        initBannerAndNews:()=>dispath({type:'initBannerAndNews'}),
+        initBanner:()=>dispath({type:'initBanner'}),
+        initContents:()=>dispath({type:'initContents'}),
+        initPageInfo:()=>dispath({type:'initPageInfo'}),
     }
 }

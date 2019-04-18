@@ -7,6 +7,7 @@ const Search = Input.Search;
 import PropTypes from 'prop-types';
 import MyFetch from 'myfetch';
 
+import emitter from 'emitter';
 export default class MyNavigator extends Component{
     constructor(props){
         super(props);
@@ -17,11 +18,18 @@ export default class MyNavigator extends Component{
           }
     }
 
-
     componentDidMount(){
         //检查登录状态
-        console.log(this.context.store)
+        // console.log(this.context.store)
+        this.checkIfLogin();
+        emitter.on('wlogin',this.checkIfLogin);
+    }
 
+    componentWillUnmount(){
+        emitter.removeListener('wlogin',this.checkIfLogin)
+    }
+
+    checkIfLogin=()=>{
         MyFetch({url:'checkIfLogin'}).then((resp)=>{
             let {err,res} = resp;
             if(!err && res.success){
@@ -30,13 +38,9 @@ export default class MyNavigator extends Component{
                     login:true,
                     userInfo:res.data
                 })
-            }else{
-                //用户未登录
-
             }
         })
     }
-
 
     handleClick = (e) => {
         this.setState({
@@ -101,7 +105,7 @@ export default class MyNavigator extends Component{
                 {
                     login ?
                     <div className="user-photo">
-                    <Link to="/login">
+                    <Link to="/editor">
                         <img src= {userInfo.headImg||'https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png'}/>
                     </Link>
                     </div>

@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Input,Form,Button,message} from 'antd';
 
+import emitter from 'emitter';
 class Login extends Component{
 
 
@@ -58,6 +59,7 @@ class Login extends Component{
         if(!err && res.success){
             message.success('登录成功');
             setTimeout(()=>{
+                emitter.emit('wlogin');
                 this.props.history.push("/home");
             },2000)
         }else{
