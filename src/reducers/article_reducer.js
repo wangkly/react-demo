@@ -1,7 +1,8 @@
 //reducer
 import {Map} from 'immutable';
 const initialState=Map({
-    article:{}
+    article:{},
+    comments:[]
 })
 
 exports.ArticleReducer = (state= initialState ,action)=>{
@@ -9,8 +10,8 @@ exports.ArticleReducer = (state= initialState ,action)=>{
     switch(action.type){
         case 'article-init':
         return state.set('article',action.payload);
-        // case 'decrease':
-        //     return state.set('count',count-1)
+        case 'comments-set':
+            return state.set('comments',action.payload)
         default:
             return state
 

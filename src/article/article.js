@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import BraftEditor from 'braft-editor'
-import {Row,Col,Button} from 'antd';
-import 'braft-editor/dist/output.css'
+import Comments from './components/comments';
 
 export default class Article extends Component{
 
@@ -22,7 +21,9 @@ export default class Article extends Component{
         return(
             <div className="article-container">
                 <div className="article-title"><h1>{article.title}</h1></div>
-                <div  className="braft-output-content" dangerouslySetInnerHTML={{__html: htmlString }}></div>  
+                <div  className="braft-output-content" dangerouslySetInnerHTML={{__html: htmlString }}></div>
+
+                <Comments {...this.props}/>  
             </div>
         )
 

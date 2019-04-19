@@ -13,15 +13,25 @@ export default class Home extends Component{
         initContents();
         let reactContent = document.getElementById('react-content');
 
-        reactContent && reactContent.addEventListener('scroll',function(){
-            if(reactContent.scrollTop+document.body.clientHeight + 1 > reactContent.scrollHeight){//滚动到距底部100
-                console.log('触发分页*****');
-                initContents();
-            }
-            // console.log('document.body.scrollTop **',reactContent.scrollTop);
-            // console.log('document.body.scrollHeight **',reactContent.scrollHeight);
-            // console.log('document.body.clientHeight **',document.body.clientHeight);
-        })
+        reactContent && reactContent.addEventListener('scroll',this.reactContentScroll)
+    }
+
+    componentWillUnmount(){
+        let reactContent = document.getElementById('react-content');
+        reactContent && reactContent.removeEventListener('scroll',this.reactContentScroll)
+    }
+
+
+    reactContentScroll = ()=>{
+        let {initContents} = this.props;
+        let reactContent = document.getElementById('react-content');
+        if(reactContent.scrollTop+document.body.clientHeight + 1 > reactContent.scrollHeight){//滚动到距底部100
+            console.log('触发分页*****');
+            initContents();
+        }
+        // console.log('document.body.scrollTop **',reactContent.scrollTop);
+        // console.log('document.body.scrollHeight **',reactContent.scrollHeight);
+        // console.log('document.body.clientHeight **',document.body.clientHeight);
     }
 
     onChange(a, b, c) {
