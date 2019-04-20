@@ -1,6 +1,6 @@
 import {queryData,delay,postTest} from './query-service';
 import {login,regist} from './loginregist-service';
-import {saveArticle,getArticle} from './article-service';
+import {saveArticle,getArticle,getComments,saveComments} from './article-service';
 export {
     queryData,
     delay,
@@ -8,5 +8,7 @@ export {
     regist,
     login,
     saveArticle,
-    getArticle
+    getArticle,
+    getComments,
+    saveComments
 }

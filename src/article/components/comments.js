@@ -34,7 +34,7 @@ export default class Comments extends Component {
         this.state={
             value:'',
             submitting:false,
-            comments:[]
+            repliRef_id:'',//针对哪条评论进行的回复
         }
     }
 
@@ -46,50 +46,50 @@ export default class Comments extends Component {
     }
 
 
-    submitComments =()=>{
-        let {value} = this.state;
+    submitComments = async ()=>{
+        let {value,repliRef_id} = this.state;
         if(!value){
             return;
         }
+
+        let {article,addComments} = this.props;
 
         this.setState({
             submitting:true
         })
 
-        setTimeout(()=>{
-            this.setState({
-                submitting: false,
-                value: '',
-                comments: [
-                  {
-                    author: 'Han Solo',
-                    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-                    content: <p>{this.state.value}</p>,
-                    datetime: moment().fromNow(),
-                  },
-                  ...this.state.comments,
-                ],
+        let param={
+          article_id:article._id,
+          repliRef_id:repliRef_id,
+          content:value
+        }
 
-            })
+       let resp = await addComments(param);
 
-        },1000)
+        console.log('resp ***',resp)
+        this.setState({
+          submitting:false,
+          value:'',
+          repliRef_id:""
+      })
+
+    }
+
+    setRepliRef_id=(repliRef_id)=>{
+      //针对某条评论进行回复
+      this.setState({
+        repliRef_id:repliRef_id,
+        })
     }
 
 
     render(){
-
-        let {submitting,value,comments} =this.state;
-
+        let {comments=[]} = this.props;
+        let {submitting,value} =this.state;
         return(
             <div className="comments">
-                {comments.length  > 0 && <CommentList comments={comments}/>}
+                {comments.length  > 0 && <CommentList comments={comments} setRepliRef_id={this.setRepliRef_id}/>}
                 <Comment 
-                    // avatar={(
-                    //     <Avatar
-                    //     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                    //     alt="Han Solo"
-                    //     />
-                    // )}
                    content={(
                         <Editor
                             onChange= {this.handleTextChange}

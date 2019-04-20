@@ -15,7 +15,6 @@ export default class Article extends Component{
     render(){
 
         let {article} = this.props;
-        console.log('render article **',article)
         let  editorState = BraftEditor.createEditorState(article.content);
         let htmlString = editorState.toHTML()
         return(
