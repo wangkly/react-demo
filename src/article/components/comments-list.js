@@ -65,7 +65,7 @@ export default class CommentList extends Component{
                 <Icon
                   type="like"
                   theme={'outlined'}
-                  onClick={this.like}
+                  onClick={()=>this.like(item)}
                 />
               </Tooltip>
               <span style={{ paddingLeft: 8, cursor: 'auto' }}>
@@ -77,7 +77,7 @@ export default class CommentList extends Component{
                 <Icon
                   type="dislike"
                   theme={'outlined'}
-                  onClick={this.dislike}
+                  onClick={()=>this.dislike(item)}
                 />
               </Tooltip>
               <span style={{ paddingLeft: 8, cursor: 'auto' }}>
@@ -93,6 +93,29 @@ export default class CommentList extends Component{
           return actions;
 
     } 
+
+
+    like=(item)=>{
+     let {like} = this.props;
+
+      let param={
+        article_id:item.article_id,
+        id:item._id,
+        repliRef_id:item.repliRef_id
+      }
+      like(param)
+    }
+
+
+    dislike =(item)=>{
+      let {dislike} = this.props;
+      let param={
+        article_id:item.article_id,
+        id:item._id,
+        repliRef_id:item.repliRef_id
+      }
+      dislike(param)
+    }
 
 
 }

@@ -1,5 +1,7 @@
 import {call,put,takeEvery,takeLatest,select} from 'redux-saga/effects';
-import {queryData,delay,postTest,regist,login,saveArticle,getArticle,getComments,saveComments} from 'services';
+import {queryData,delay,postTest,regist,login,saveArticle,getArticle,getComments,saveComments, 
+    likeComments,
+    dislikeComments} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -70,7 +72,24 @@ function* loadComments(action){
 function* addComments(action){
     let resp = yield  call(saveComments,action);
     let {err,res} = resp;
+    if(!err && res.success){
+        yield put({type:'LoadComments',id:action.article_id});
+    }else{
+        action && action.callback(resp);
+    }
+}
+
+
+function*  commentsLike(action){
+    let resp = yield call(likeComments,action);
     yield put({type:'LoadComments',id:action.article_id});
+}
+
+
+function*  commentsDislike(action){
+    let resp = yield call(dislikeComments,action);
+    yield put({type:'LoadComments',id:action.article_id});
+
 }
 
 
@@ -85,6 +104,8 @@ function* mySaga(){
     yield takeLatest('GET-ARTICLE',getArticleById);
     yield takeLatest('LoadComments',loadComments);
     yield takeLatest('AddCommnets',addComments);
+    yield takeLatest('CommentsLike',commentsLike);
+    yield takeLatest('CommentsDislike',commentsDislike);
 }
 
 // function* mySaga(){

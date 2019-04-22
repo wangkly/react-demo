@@ -1,5 +1,5 @@
 import React,{Component } from 'react';
-import {Row,Col,Button, Comment, Avatar, Form, Input,} from 'antd';
+import {Row,Col,Button, Comment, Avatar, Form, Input,message} from 'antd';
 import CommentList from './comments-list';
 
 import moment from 'moment';
@@ -61,7 +61,8 @@ export default class Comments extends Component {
         let param={
           article_id:article._id,
           repliRef_id:repliRef_id,
-          content:value
+          content:value,
+          callback:this.saveCallBack
         }
 
        let resp = await addComments(param);
@@ -73,6 +74,14 @@ export default class Comments extends Component {
           repliRef_id:""
       })
 
+    }
+
+
+    saveCallBack=(resp)=>{
+      let {err,res} = resp;
+      if(err || !res.success){
+        message.warning(res.errMsg)
+      }
     }
 
     setRepliRef_id=(repliRef_id)=>{
@@ -88,7 +97,7 @@ export default class Comments extends Component {
         let {submitting,value} =this.state;
         return(
             <div className="comments">
-                {comments.length  > 0 && <CommentList comments={comments} setRepliRef_id={this.setRepliRef_id}/>}
+                {comments.length  > 0 && <CommentList comments={comments} setRepliRef_id={this.setRepliRef_id} {...this.props}/>}
                 <Comment 
                    content={(
                         <Editor

@@ -34,3 +34,21 @@ exports.saveComments = (param)=>{
         })
     })
 }
+
+
+exports.likeComments =(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'comments/like',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
+
+exports.dislikeComments =(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'comments/dislike',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
