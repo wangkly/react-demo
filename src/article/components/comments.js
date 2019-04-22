@@ -35,7 +35,10 @@ export default class Comments extends Component {
             value:'',
             submitting:false,
             repliRef_id:'',//针对哪条评论进行的回复
+            placeholder:'说点什么吧'
         }
+
+        this.commentsRef = React.createRef();
     }
 
 
@@ -67,11 +70,11 @@ export default class Comments extends Component {
 
        let resp = await addComments(param);
 
-        console.log('resp ***',resp)
         this.setState({
           submitting:false,
           value:'',
-          repliRef_id:""
+          repliRef_id:"",
+          placeholder:'说点什么吧'
       })
 
     }
@@ -84,28 +87,46 @@ export default class Comments extends Component {
       }
     }
 
-    setRepliRef_id=(repliRef_id)=>{
+    setRepliRef_id=(item)=>{
       //针对某条评论进行回复
       this.setState({
-        repliRef_id:repliRef_id,
+        repliRef_id:item._id,
+        placeholder:`对${item.author}进行回复：`
+        },()=>{
+          this.commentsRef.current.focus();
         })
     }
 
 
     render(){
         let {comments=[]} = this.props;
-        let {submitting,value} =this.state;
+        let {submitting,value,placeholder} =this.state;
         return(
             <div className="comments">
                 {comments.length  > 0 && <CommentList comments={comments} setRepliRef_id={this.setRepliRef_id} {...this.props}/>}
                 <Comment 
                    content={(
-                        <Editor
-                            onChange= {this.handleTextChange}
-                            onSubmit={this.submitComments}
-                            submitting={submitting}
-                            value={value}
-                        />
+                        // <Editor
+                        //     onChange= {this.handleTextChange}
+                        //     onSubmit={this.submitComments}
+                        //     submitting={submitting}
+                        //     value={value}
+                        // />
+                        <div>
+                        <Form.Item>
+                          <TextArea rows={4} ref={this.commentsRef} placeholder={placeholder} onChange={this.handleTextChange} value={value} />
+                        </Form.Item>
+                        <Form.Item>
+                          <Button
+                            htmlType="submit"
+                            loading={submitting}
+                            onClick={this.submitComments}
+                            type="primary"
+                          >
+                            提交
+                          </Button>
+                        </Form.Item>
+                      </div>
                    )}     
                 />
             </div>

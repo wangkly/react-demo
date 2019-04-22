@@ -87,7 +87,7 @@ export default class CommentList extends Component{
           ];
 
           if(Repl){
-              actions.push(<span onClick={()=>{this.props.setRepliRef_id(item._id)}}>回复</span>)
+              actions.push(<span onClick={()=>{this.props.setRepliRef_id(item)}}>回复</span>)
           }
 
           return actions;
