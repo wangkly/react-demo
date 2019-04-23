@@ -10,7 +10,8 @@ class Login extends Component{
         return(
             <div className="login-container">
             <div className="login-panel">
-                <Form   onSubmit={this.handleFormSubmit} >
+            <img className="logo " src="/logo.png"  />
+                <Form   onSubmit={this.handleFormSubmit} style={{margin: '20px 0'}} >
                         <Form.Item>
                             {
                                 getFieldDecorator('account',{

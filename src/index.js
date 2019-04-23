@@ -14,6 +14,7 @@ import Video from './video';
 import Regist from './regist';
 import Login from './login';
 import Editor from './editor';
+import User from './user';
 
 import Article from './article';
 
@@ -42,6 +43,8 @@ export default class Index extends Component{
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/editor" component={Editor} />
                                 <Route exact path="/article/:aid" component={Article} />
+                                <Route exact path="/user" component={User} />
+
                         </div>
                     </Router>
 

@@ -33,6 +33,7 @@ class Regist extends Component{
         return(
             <div className="regist-container">
             <div className="regist-form">
+            <img src="/logo.png"  />
                 <Form  onSubmit={this.handleFormSubmit} style={{'margin':'auto','marginTop':100}}>
                     <Form.Item label="邮箱地址" {...formItemLayout}>
                         {
