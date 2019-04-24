@@ -10,7 +10,12 @@ export default class User extends Component{
     render(){
         return(
             <div className="user-container">
-                user
+                <div className="user-top">
+                    <div className="user-headimg">
+                        <img src ="https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png" />   
+                    </div>
+                    
+                </div>
             </div>
         )
     }
