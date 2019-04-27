@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Button} from 'antd';
+import Right from './components/right';
 
 export default class User extends Component{
 
@@ -17,8 +18,9 @@ export default class User extends Component{
                     </div>
 
                     <div className="user-info">
-                        <h2>wangkly</h2>
-                        <h4>wangkly,wangkly</h4>
+                        <span className="user-name">wangkly</span>
+                        <br></br>
+                        <span className="user-desc">wangkly,wangkly</span>
                     </div>
                     
                     <div className="user-opts">
@@ -26,6 +28,16 @@ export default class User extends Component{
                     </div>
 
                 </div>
+
+                <div className="user-bottom">
+                    <div className="left-panel">
+                        left
+                    </div>
+                    <div className="right-panel">
+                        <Right />
+                    </div>
+                </div>
+
             </div>
         )
     }

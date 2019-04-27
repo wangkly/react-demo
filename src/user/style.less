@@ -1,13 +1,14 @@
 .user-container{
     margin: 0 250px;
     padding: 50px 20px;
-    background-color: #fff;
+    background: #f6f6f6;
     min-height: 800px;
 
     .user-top{
         height: 200px;
         background-color: green;
         display: flex;
+        position: relative;
         .user-headimg{
             display: inline-block;
             margin: 30px;
@@ -19,10 +20,65 @@
 
         .user-info{
             text-align: center;
+            vertical-align:middle;
+            height: 100px;
+            margin-top: 80px;
+            .user-name{
+                font-size: 35px;
+            }
         }
 
         .user-opts{
-
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
         }
+    }
+
+
+    .user-bottom{
+        display: flex;
+        margin-top: 20px;
+        .left-panel{
+            width: 80%;
+            padding:10px;
+            margin: 10px;
+            background: #fff;
+        }
+
+        .right-panel{
+            width: 20%;
+            padding:10px;
+            margin: 10px;
+            background: #fff;
+             .follow{
+                 display: flex;
+                 height: 80px;
+                 .follow-panel{
+                    width: 50%;
+                    height: 60px;
+                    text-align: center;
+                 }
+             }   
+
+             .user-opt{
+                 margin-top:10px;
+                 height: 80px;
+                 .opt-panel{
+                     width: 50%;
+                     text-align: center;
+                 }
+                 .icon-write{
+                     font-size: 24px;
+                 }
+             }
+        }
+
+        .split{
+            border: 1px solid #fff;
+        }
+
+
+
     }
 }
