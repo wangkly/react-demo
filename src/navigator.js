@@ -105,7 +105,7 @@ export default class MyNavigator extends Component{
                 {
                     login ?
                     <div className="user-photo">
-                    <Link to="/user">
+                    <Link to={`/user/${userInfo.userId}`}>
                         <img src= {userInfo.headImg||'https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png'}/>
                     </Link>
                     </div>

@@ -1,7 +1,7 @@
 import {call,put,takeEvery,takeLatest,select} from 'redux-saga/effects';
 import {queryData,delay,postTest,regist,login,saveArticle,getArticle,getComments,saveComments, 
     likeComments,
-    dislikeComments} from 'services';
+    dislikeComments,getUserInfos} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -92,6 +92,10 @@ function*  commentsDislike(action){
 
 }
 
+function* getUserInfo(action){
+    let resp = yield call(getUserInfos,action);
+}
+
 
 
 function* mySaga(){
@@ -106,6 +110,7 @@ function* mySaga(){
     yield takeLatest('AddCommnets',addComments);
     yield takeLatest('CommentsLike',commentsLike);
     yield takeLatest('CommentsDislike',commentsDislike);
+    yield takeLatest('UserInfo',getUserInfo);
 }
 
 // function* mySaga(){

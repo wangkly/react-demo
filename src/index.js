@@ -43,7 +43,7 @@ export default class Index extends Component{
                                 <Route exact path="/login" component={Login} />
                                 <Route exact path="/editor" component={Editor} />
                                 <Route exact path="/article/:aid" component={Article} />
-                                <Route exact path="/user" component={User} />
+                                <Route exact path="/user/:userId" component={User} />
 
                         </div>
                     </Router>
