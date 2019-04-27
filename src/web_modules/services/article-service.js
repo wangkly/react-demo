@@ -18,6 +18,15 @@ exports.getArticle = (param)=>{
 }
 
 
+exports.getUserArticles =(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'getUserArticles',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
+
 exports.getComments = (param)=>{
     return new Promise((resolve)=>{
         MyFetch({url:'getComments',method:'POST',body:param}).then((res)=>{

@@ -12,9 +12,9 @@ export default class User extends Component{
     componentDidMount(){
         let {getUserInfo,getUserArticle} = this.props;
         let {userId} =this.props.match.params;
-        console.log('userId****',userId);
 
         getUserInfo(userId);
+        getUserArticle(userId)
     }
 
 
