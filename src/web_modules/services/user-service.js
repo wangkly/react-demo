@@ -7,3 +7,14 @@ exports.getUserInfos=(param)=>{
             })
         })
 }
+
+
+
+exports.updateUserHeadImg=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'user-setImg',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+

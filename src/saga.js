@@ -1,8 +1,9 @@
 import {call,put,takeEvery,takeLatest,select} from 'redux-saga/effects';
-import {queryData,delay,postTest,regist,login,saveArticle,getArticle,getComments,saveComments, 
+import {queryData,delay,postTest,regist,
+    login,saveArticle,getArticle,getComments,saveComments, 
     likeComments,
     dislikeComments,getUserInfos,
-    getUserArticles} from 'services';
+    getUserArticles,updateUserHeadImg} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -94,7 +95,10 @@ function*  commentsDislike(action){
 }
 
 function* getUserInfo(action){
-    let resp = yield call(getUserInfos,action);
+    let {err,res} = yield call(getUserInfos,action);
+    if(!err && res.success){
+        yield put({type:'userInfo-set',payload:res.data})
+    }
 }
 
 //获取用户的文章
@@ -120,6 +124,13 @@ function* getArticleByUser(action){
 
 }
 
+function* updateUserImg(action){
+   let {err,res} =  yield call(updateUserHeadImg,action)
+    if(!err && res.success){
+        let {userId} = action;
+        yield put({type:'UserInfo',userId})
+    }
+}
 
 
 function* mySaga(){
@@ -136,6 +147,7 @@ function* mySaga(){
     yield takeLatest('CommentsDislike',commentsDislike);
     yield takeLatest('UserInfo',getUserInfo);
     yield takeLatest('GetUserArticle',getArticleByUser);
+    yield takeLatest('UpdateUserHeadImg',updateUserImg);
 }
 
 // function* mySaga(){

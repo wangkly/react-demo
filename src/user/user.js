@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
-import {Button} from 'antd';
 import Right from './components/right';
+import Article from './components/article';
+import UserInfo from './components/user-info';
 
 export default class User extends Component{
 
@@ -12,35 +13,45 @@ export default class User extends Component{
     componentDidMount(){
         let {getUserInfo,getUserArticle} = this.props;
         let {userId} =this.props.match.params;
-
         getUserInfo(userId);
-        getUserArticle(userId)
+        getUserArticle(userId);
+
+        let reactContent = document.getElementById('react-content');
+        reactContent && reactContent.addEventListener('scroll',this.reactContentScroll)
     }
 
 
+    componentWillUnmount(){
+        let reactContent = document.getElementById('react-content');
+        reactContent && reactContent.removeEventListener('scroll',this.reactContentScroll)
+    }
+
+
+    reactContentScroll = ()=>{
+        let {getUserArticle} = this.props;
+        let {userId} =this.props.match.params;
+        let reactContent = document.getElementById('react-content');
+        if(reactContent.scrollTop+document.body.clientHeight + 1 > reactContent.scrollHeight){//滚动到距底部100
+            getUserArticle(userId);
+        }
+    }
+
+
+
     render(){
+        let {userInfo,articles,updateUserHeadImg} = this.props;
+
         return(
             <div className="user-container">
-                <div className="user-top">
-                    <div className="user-headimg">
-                        <img src ="https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png" />   
-                    </div>
-
-                    <div className="user-info">
-                        <span className="user-name">wangkly</span>
-                        <br></br>
-                        <span className="user-desc">wangkly,wangkly</span>
-                    </div>
-                    
-                    <div className="user-opts">
-                        <Button type="gohst" >编辑个人资料</Button>
-                    </div>
-
-                </div>
+                <UserInfo userInfo={userInfo} updateUserHeadImg={updateUserHeadImg}/>
 
                 <div className="user-bottom">
                     <div className="left-panel">
-                        left
+                        {
+                            articles.map((item,index)=>{
+                                return (<Article key={index} article={item}/>)
+                            })    
+                        }
                     </div>
                     <div className="right-panel">
                         <Right />
