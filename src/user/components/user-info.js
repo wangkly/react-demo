@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Button,Upload, Icon, message} from 'antd';
+import {Link} from 'react-router-dom';
 export default class UserInfo extends Component{
 
     constructor(props){
@@ -27,6 +28,7 @@ export default class UserInfo extends Component{
                 
                 <Upload
                     name="file"
+                    disabled={false}
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={false}
@@ -46,7 +48,7 @@ export default class UserInfo extends Component{
             </div>
             
             <div className="user-opts">
-                <Button type="gohst" >编辑个人资料</Button>
+               <Link to={`/user/edit/${userInfo._id}`}><Button type="gohst" >编辑个人资料</Button></Link>
             </div>
             </div>
         )
