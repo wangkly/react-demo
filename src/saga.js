@@ -97,8 +97,27 @@ function* getUserInfo(action){
     let resp = yield call(getUserInfos,action);
 }
 
+//获取用户的文章
 function* getArticleByUser(action){
-    let resp = yield call(getUserArticles,action);
+    let state = yield select();
+    let pageInfo = state.getIn(['userReducer','pageInfo'])||{};
+    let articles = state.getIn(['userReducer','articles'])||[];
+    let param ={
+        userId:action.userId
+    }
+
+    let {err,res}  = yield call(getUserArticles,Object.assign(param,pageInfo));
+    
+    if(!err && res.success){
+        articles = articles.concat(res.data);
+        yield put({type:'user-article-init',payload:articles})
+        if(res.data.length > 0){
+            pageInfo.pageNo +=1;
+            yield put({type:"userSetPageInfo",payload:pageInfo })
+        }
+
+    }
+
 }
 
 
