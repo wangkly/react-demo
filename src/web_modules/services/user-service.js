@@ -18,3 +18,12 @@ exports.updateUserHeadImg=(param)=>{
     })
 }
 
+
+exports.updateUser=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'user-update',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+

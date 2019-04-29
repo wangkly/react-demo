@@ -42,7 +42,7 @@ export default class UserInfo extends Component{
             </div>
 
             <div className="user-info">
-                <span className="user-name">{userInfo.nickname||''}</span>
+                <span className="user-name">{userInfo.nickName||''}</span>
                 <br></br>
                 <span className="user-desc">{userInfo.desc||''}</span>
             </div>

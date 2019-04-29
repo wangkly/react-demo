@@ -3,7 +3,7 @@ import {queryData,delay,postTest,regist,
     login,saveArticle,getArticle,getComments,saveComments, 
     likeComments,
     dislikeComments,getUserInfos,
-    getUserArticles,updateUserHeadImg} from 'services';
+    getUserArticles,updateUserHeadImg,updateUser} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -133,6 +133,19 @@ function* updateUserImg(action){
 }
 
 
+function* updateUserInfo(action){
+    let {err,res} = yield call(updateUser,action);
+
+    if(!err && res.success){
+        let {userId} = action;
+        yield put({type:'UserInfo',userId})
+        if(action.callback){
+            action.callback({err,res})
+        }
+    }
+}
+
+
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
     yield takeLatest('initBanner',initBanner);
@@ -148,6 +161,7 @@ function* mySaga(){
     yield takeLatest('UserInfo',getUserInfo);
     yield takeLatest('GetUserArticle',getArticleByUser);
     yield takeLatest('UpdateUserHeadImg',updateUserImg);
+    yield takeLatest('UpdateUserInfo',updateUserInfo);
 }
 
 // function* mySaga(){
