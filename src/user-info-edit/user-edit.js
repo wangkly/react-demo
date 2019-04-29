@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
 import {Upload, Icon, message,Form,Input} from 'antd';
-
+import MyFetch from 'myfetch';
+import {withRouter} from "react-router-dom";
 import EditInfoForm from './componets/edit-info';
-
 const FormItem = Form.Item;
 
-export default class UserEdit extends Component{
+class UserEdit extends Component{
 
     constructor(props){
         super(props);
@@ -16,9 +16,22 @@ export default class UserEdit extends Component{
 
 
     componentDidMount(){
+
         let {getUserInfo} = this.props;
         let {userId} =this.props.match.params;
-        getUserInfo(userId);
+
+        MyFetch({url:`checkCanOperate/${userId}`}).then((resp)=>{
+            console.log('checkCanOperate **',resp)
+            let {err,res} = resp;
+            if(!err && res.success){
+                //cookies对应的是当前操作的user
+                getUserInfo(userId);
+            }else{
+                //不能操作跳转到登录
+                message.warning('请先登录');
+                this.props.history.push("/login");
+            }
+        })
     }
 
 
@@ -95,6 +108,6 @@ export default class UserEdit extends Component{
 
       }
 
-
-
 }
+
+export default withRouter(UserEdit)

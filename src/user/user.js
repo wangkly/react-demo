@@ -40,10 +40,10 @@ export default class User extends Component{
 
     render(){
         let {userInfo,articles,updateUserHeadImg} = this.props;
-
+        let {userId} =this.props.match.params;
         return(
             <div className="user-container">
-                <UserInfo userInfo={userInfo} updateUserHeadImg={updateUserHeadImg}/>
+                <UserInfo userInfo={userInfo} userId={userId} updateUserHeadImg={updateUserHeadImg}/>
 
                 <div className="user-bottom">
                     <div className="left-panel">

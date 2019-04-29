@@ -1,18 +1,39 @@
 import React,{Component} from 'react';
 import {Button,Upload, Icon, message} from 'antd';
 import {Link} from 'react-router-dom';
+import MyFetch from 'myfetch';
 export default class UserInfo extends Component{
 
     constructor(props){
         super(props);
         this.state={
             loading:false,
+            canOperate:false,//是否能在user页面进行操作，如上传头像，修改个人资料
         }
+    }
+
+
+    componentDidMount(){
+        let {userId} =this.props;
+        MyFetch({url:`checkCanOperate/${userId}`}).then((resp)=>{
+            let {err,res} = resp;
+            if(!err && res.success){
+                //cookies对应的是当前操作的user
+                this.setState({
+                    canOperate:true
+                })
+            }else{
+                this.setState({
+                    canOperate:false
+                })
+            }
+        })
     }
 
 
     render(){
         let {userInfo} = this.props;
+        let {canOperate} = this.state;
 
         const uploadButton = (
             <div className="upload-tips">
@@ -28,7 +49,7 @@ export default class UserInfo extends Component{
                 
                 <Upload
                     name="file"
-                    disabled={false}
+                    disabled={!canOperate}
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={false}
@@ -48,7 +69,12 @@ export default class UserInfo extends Component{
             </div>
             
             <div className="user-opts">
-               <Link to={`/user/edit/${userInfo._id}`}><Button type="gohst" >编辑个人资料</Button></Link>
+                {
+                    canOperate ?
+                    <Link to={`/user/edit/${userInfo._id}`}><Button type="gohst" >编辑个人资料</Button></Link>
+                    :
+                    null
+                }
             </div>
             </div>
         )

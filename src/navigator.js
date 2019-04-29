@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Menu,Icon,Input} from 'antd';
+import {Menu,Icon,Input,Dropdown} from 'antd';
 import {Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -50,6 +50,20 @@ export default class MyNavigator extends Component{
 
     render(){
         let {login,userInfo} = this.state;
+
+        const menu = (
+            <Menu>
+              <Menu.Item key="0">
+                <a href={`/user/${userInfo.userId}`}>我的主页</a>
+              </Menu.Item>
+              <Menu.Item key="1">
+                <a target="_blank" rel="noopener noreferrer" href="/login">退出</a>
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item key="3" disabled>3rd menu item</Menu.Item>
+            </Menu>
+          );
+
         return(
             <div className="top">
                 <div className="top-menu clearfix">
@@ -105,9 +119,9 @@ export default class MyNavigator extends Component{
                 {
                     login ?
                     <div className="user-photo">
-                    <Link to={`/user/${userInfo.userId}`}>
-                        <img src= {userInfo.headImg||'https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png'}/>
-                    </Link>
+                        <Dropdown overlay={menu}>
+                            <img src= {userInfo.headImg||'https://pic.qianmi.com/qmui/v0.2/img/avatar-default.png'}/>
+                        </Dropdown>
                     </div>
                     :
                     <div className="opt-btn">
