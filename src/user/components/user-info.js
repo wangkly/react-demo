@@ -15,8 +15,8 @@ export default class UserInfo extends Component{
         let {userInfo} = this.props;
 
         const uploadButton = (
-            <div>
-              <Icon type={this.state.loading ? 'loading' : 'plus'} />
+            <div className="upload-tips">
+              <Icon type={this.state.loading ? 'loading' : 'camera'} style={{ fontSize: '24px', }} />
               <div className="ant-upload-text">上传头像</div>
             </div>
           );
@@ -36,9 +36,9 @@ export default class UserInfo extends Component{
                     beforeUpload={this.beforeUpload}
                     onChange={this.handleChange}
                 >
-                    {userInfo.headImg ? <img src={userInfo.headImg} alt="avatar" /> : uploadButton}
+                    {uploadButton}
                 </Upload>
-
+                <img src={userInfo.headImg} alt="avatar" />
             </div>
 
             <div className="user-info">
