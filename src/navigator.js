@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Menu,Icon,Input,Dropdown} from 'antd';
+import {Menu,Icon,Input,Dropdown,message} from 'antd';
 import {Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -38,6 +38,10 @@ export default class MyNavigator extends Component{
                     login:true,
                     userInfo:res.data
                 })
+            }else{
+                this.setState({
+                    login:false
+                })
             }
         })
     }
@@ -56,8 +60,9 @@ export default class MyNavigator extends Component{
               <Menu.Item key="0">
                 <a href={`/user/${userInfo.userId}`}>我的主页</a>
               </Menu.Item>
+              <Menu.Divider />
               <Menu.Item key="1">
-                <a target="_blank" rel="noopener noreferrer" href="/login">退出</a>
+                <a rel="noopener noreferrer" href="#" onClick={this.logout}>退出</a>
               </Menu.Item>
               <Menu.Divider />
               <Menu.Item key="3" disabled>3rd menu item</Menu.Item>
@@ -133,7 +138,15 @@ export default class MyNavigator extends Component{
         )
     }
 
-
+    logout=()=>{
+        let thar = this;
+        MyFetch({url:'logout'}).then(()=>{
+            message.success('操作成功');
+            setTimeout(()=>{
+                thar.checkIfLogin();
+            },2000)
+        });
+    }
 }
 
 MyNavigator.contextTypes = {

@@ -61,7 +61,9 @@ function* getArticleById(action){
     let resp = yield call(getArticle,action);
     yield put({type:'article-init',payload:resp.res.data});
     yield put({type:'LoadComments',id:action.id});
-
+    //查文章的作者
+    let userResp = yield call(getUserInfos,{userId:resp.res.data.userId})
+    yield put({type:'article-user',payload:userResp.res.data});
 }
 
 function* loadComments(action){

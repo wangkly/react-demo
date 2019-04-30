@@ -21,7 +21,6 @@ class UserEdit extends Component{
         let {userId} =this.props.match.params;
 
         MyFetch({url:`checkCanOperate/${userId}`}).then((resp)=>{
-            console.log('checkCanOperate **',resp)
             let {err,res} = resp;
             if(!err && res.success){
                 //cookies对应的是当前操作的user
@@ -29,7 +28,7 @@ class UserEdit extends Component{
             }else{
                 //不能操作跳转到登录
                 message.warning('请先登录');
-                this.props.history.push("/login");
+                this.props.history.push("/home");
             }
         })
     }
