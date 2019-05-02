@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import BraftEditor from 'braft-editor'
-import {Icon} from 'antd';
+import {Icon,Button} from 'antd';
 import Comments from './components/comments';
 
 export default class Article extends Component{
@@ -28,13 +28,16 @@ export default class Article extends Component{
                     <div className="user-info">
                         <div className="user-top">
                             <span>{userInfo.nickName||userInfo.account}</span>
-                            <Icon type="heart" className="user-follow" theme="twoTone" twoToneColor="#eb2f96" />
+                            <Button type="primary" icon="plus" size="small">关注</Button>
+                            {/* <Icon type="heart" className="user-follow" theme="twoTone" twoToneColor="#eb2f96" /> */}
                         </div>
                         <span>{userInfo.nickName||userInfo.account}</span>
                     </div>
                 </div>
                 <div  className="braft-output-content" dangerouslySetInnerHTML={{__html: htmlString }}></div>
-
+                <div className="bottom-row">
+                    <Button type="primary" icon="heart" size="large">赞赏支持</Button>
+                </div>
                 <Comments {...this.props}/>  
             </div>
         )

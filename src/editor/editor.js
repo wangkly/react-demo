@@ -34,10 +34,10 @@ class FormDemo extends React.Component {
         const submitData = {
           cover:thar.state.cover,
           title: values.title,
+          desc:values.content.toText().substr(0,200),
           content: values.content.toRAW(), // or values.content.toHTML() 
           callback:thar.callback
         }
-        console.log(submitData)
 
         saveContent(submitData)
 
