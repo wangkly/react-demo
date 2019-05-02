@@ -1,8 +1,32 @@
 import React,{Component} from 'react';
 import {Form,Input,Row,Col,Button,message} from 'antd';
 import {withRouter} from "react-router-dom";
+import MyFetch from 'myfetch';
 
 class Regist extends Component{
+
+    constructor(props){
+        super(props);
+        this.state={
+            validatecode:''
+        }
+        this.vcref = React.createRef();
+    }
+
+
+    componentDidMount(){
+        // this.getValidateCode();
+    }
+
+
+    getValidateCode=()=>{
+        MyFetch({url:'regist/validate-code'}).then((resp)=>{
+            let {err,res} = resp;
+            this.setState({
+                validatecode:res.data||''
+            })
+        })
+    }
 
     render(){
         const { getFieldDecorator } = this.props.form;
@@ -33,8 +57,10 @@ class Regist extends Component{
         return(
             <div className="regist-container">
             <div className="regist-form">
-            <img src="/logo.png"  />
-                <Form  onSubmit={this.handleFormSubmit} style={{'margin':'auto','marginTop':100}}>
+            <div className="top-logo">
+                <img src="/logo.png"  />
+            </div>
+                <Form  onSubmit={this.handleFormSubmit}>
                     <Form.Item label="邮箱地址" {...formItemLayout}>
                         {
                             getFieldDecorator('email',{
@@ -76,10 +102,30 @@ class Regist extends Component{
                                 <Input type="password" placeholder="再次确认密码"/>
                             )
                         }
-                    </Form.Item>  
+                    </Form.Item>
+
+
+                    <Form.Item {...formItemLayout} label="验证码">
+                        {
+                            getFieldDecorator('vcode',{
+                                rules:[{
+                                    required:true,message:'请输入验证码'
+                                }]
+                            })(
+                                <div className="validate-code">
+                                    <Input  placeholder="请输入验证码"/>
+                                    <a href="#" onClick={this.refreshVCode}>
+                                       <img className="vcode" ref={this.vcref} src="http://localhost:3001/regist/validate-code?page=regist" alt="验证码"/>
+                                    </a>
+                                </div>
+                            )
+                        }
+                    </Form.Item>    
 
                     <Form.Item >
-                        <Button type="primary" htmlType="submit">注册</Button>    
+                        <div className="bottom-btns">
+                            <Button type="primary" htmlType="submit">注册</Button>    
+                        </div>
                     </Form.Item>     
 
                 </Form>
@@ -88,6 +134,13 @@ class Regist extends Component{
             </div>
         )
     }
+
+    refreshVCode=()=>{
+        // console.log(this.vcref.current)
+        this.vcref.current.src = 'http://localhost:3001/regist/validate-code?page=regist&d='+Math.random()
+    }
+
+
 
     validateToNextPassword=(rule, value, callback)=>{
         const form = this.props.form;

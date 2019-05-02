@@ -10,7 +10,9 @@ class Login extends Component{
         return(
             <div className="login-container">
             <div className="login-panel">
-            <img className="logo " src="/logo.png"  />
+            <div>
+                <img className="logo " src="/logo.png"  />
+            </div>
                 <Form   onSubmit={this.handleFormSubmit} style={{margin: '20px 0'}} >
                         <Form.Item>
                             {
@@ -43,7 +45,9 @@ class Login extends Component{
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">登录</Button>  
+                            <div className="bottom-btns">
+                                <Button type="primary" htmlType="submit">登录</Button>  
+                            </div>
                         </Form.Item>
 
                 </Form>
