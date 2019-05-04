@@ -3,7 +3,9 @@ import {queryData,delay,postTest,regist,
     login,saveArticle,getArticle,getComments,saveComments, 
     likeComments,
     dislikeComments,getUserInfos,
-    getUserArticles,updateUserHeadImg,updateUser} from 'services';
+    getUserArticles,updateUserHeadImg,updateUser,
+    likeArticleById
+} from 'services';
 // import MyFetch from 'myfetch';
 
 
@@ -147,6 +149,11 @@ function* updateUserInfo(action){
     }
 }
 
+function* likeThisArticle(action){
+    let {err,res} = yield call(likeArticleById,action);
+
+}
+
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
@@ -164,6 +171,7 @@ function* mySaga(){
     yield takeLatest('GetUserArticle',getArticleByUser);
     yield takeLatest('UpdateUserHeadImg',updateUserImg);
     yield takeLatest('UpdateUserInfo',updateUserInfo);
+    yield takeLatest('likeArticle',likeThisArticle);
 }
 
 // function* mySaga(){

@@ -18,6 +18,15 @@ exports.getArticle = (param)=>{
 }
 
 
+exports.likeArticleById = (param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'likeArticle',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
+
 exports.getUserArticles =(param)=>{
     return new Promise((resolve)=>{
         MyFetch({url:'getUserArticles',method:'POST',body:param}).then((res)=>{

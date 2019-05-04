@@ -7,6 +7,6 @@ exports.mapDispatchToProps =(dispatch)=>{
         addComments:(param)=>dispatch({type:'AddCommnets',...param}),
         like:(param)=>dispatch({type:'CommentsLike',...param}),
         dislike:(param)=>dispatch({type:'CommentsDislike',...param}),
-        
+        likeArticle:(param)=>dispatch({type:'likeArticle',...param})
     }
 }
