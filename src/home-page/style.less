@@ -16,6 +16,35 @@
 
   .bottom-area{
     padding: 20px 50px;
+
+    .article-item{
+      height: 180px;
+      margin: 15px 0px;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+
+      .contents{
+        display: flex;
+        height: 90px;
+        .desc{
+          width: 70%;
+        }
+        .cover{
+          max-height: 100%;
+          margin-left: 20px;
+        }
+      }
+
+      .bottom-row{
+        position: absolute;
+        bottom: 5px;
+        .article-statistics{
+            width: 60px;
+            margin: 0 15px;
+        }
+      }
+
+    }
   }
 
   .ant-carousel{
