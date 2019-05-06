@@ -16,6 +16,7 @@ import Login from './login';
 import Editor from './editor';
 import User from './user';
 import UserEdit from './user-info-edit';
+import Follows from './follows';
 
 import Article from './article';
 
@@ -46,6 +47,7 @@ export default class Index extends Component{
                                 <Route exact path="/article/:aid" component={Article} />
                                 <Route exact path="/user/:userId" component={User} />
                                 <Route exact path="/user/edit/:userId" component={UserEdit} />
+                                <Route exact path="/follow/:type?" component={Follows} />
 
                         </div>
                     </Router>

@@ -45,6 +45,24 @@ exports.unfollowTargetUser=(param)=>{
     })
 }
 
+//查看用户的关注
+exports.queryUserfollows=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'query-follows',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
+//查看用户粉丝
+exports.queryUserfollowers=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'query-followers',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
 
 
 

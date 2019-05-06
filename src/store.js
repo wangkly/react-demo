@@ -14,13 +14,15 @@ import {todoReducer} from './reducers/todo_reducer';
 import {HomeReducer} from './reducers/home-reducer';
 import {ArticleReducer} from './reducers/article_reducer';
 import {userReducer} from './reducers/user_reducer';
+import {FollowReducer} from './reducers/follow_reducer';
  
 const rootReducer = combineReducers({
     HomeReducer,
     countReducer,
     todoReducer,
     ArticleReducer,
-    userReducer
+    userReducer,
+    FollowReducer
 })
 
 const sageMiddleware = createSagaMiddleware(mySaga);

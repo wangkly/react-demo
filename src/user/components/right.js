@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Icon} from 'antd';
+import {Link} from 'react-router-dom';
 
 export default class Right extends Component{
 
@@ -12,7 +13,7 @@ export default class Right extends Component{
                 <div className="follow">
                     <div className="follow-panel">
                         <h3>关注了</h3>
-                        <h4>0</h4>
+                        <h4><Link to={'/follow'}>0</Link></h4>
                     </div>
                     <div className="split"></div>
                     <div className="follow-panel">

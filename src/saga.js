@@ -7,7 +7,9 @@ import {queryData,delay,postTest,regist,
     likeArticleById,
     followTargetUser,
     checkfollowTargetUser,
-    unfollowTargetUser
+    unfollowTargetUser,
+    queryUserfollows,
+    queryUserfollowers
 } from 'services';
 // import MyFetch from 'myfetch';
 
@@ -184,6 +186,20 @@ function* checkfollowUser(action){
     }
 }
 
+function* queryFollows(action){
+   let {userId} = action;
+   let resp = yield call(queryUserfollows,{userId})
+
+}
+
+
+
+function* queryFollowers(action){
+    let {userId} = action;
+    let resp = yield call(queryUserfollowers,{userId})
+    
+}
+
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
@@ -205,11 +221,10 @@ function* mySaga(){
     yield takeLatest('checkfollow',checkfollowUser);
     yield takeLatest('follow',followUser);
     yield takeLatest('unfollow',unfollowUser);
+    yield takeLatest('query-follows',queryFollows);
+    yield takeLatest('query-followers',queryFollowers);
 }
 
-// function* mySaga(){
-//     yield takeLatest("beforeADD",beforeAdd)
-// }
 
 
 export default mySaga;
