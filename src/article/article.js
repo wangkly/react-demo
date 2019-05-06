@@ -7,11 +7,37 @@ import Comments from './components/comments';
 
 export default class Article extends Component{
 
+    constructor(props){
+        super(props);
+        this.state={
+            followed:false
+        }
+    }
 
     componentDidMount(){
-        let {init} = this.props;
+        let {init,checkFollow} = this.props;
         let {aid} =this.props.match.params;
         init(aid)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        let {checkFollow} = this.props;
+        if(this.props.userInfo._id !=prevProps.userInfo._id){
+            checkFollow({userId:this.props.userInfo._id,callback:this.checkfollowCallback})
+        }
+    }
+
+    checkfollowCallback=(resp)=>{
+        let {res,err} = resp;
+        if(!err && res.success){
+            this.setState({
+                followed:true
+            })
+        }else{
+            this.setState({
+                followed:false
+            })
+        }
     }
 
 
@@ -32,7 +58,12 @@ export default class Article extends Component{
                     <div className="user-info">
                         <div className="user-top">
                             <span>{userInfo.nickName||userInfo.account}</span>
-                            <Button type="primary" icon="plus" size="small">关注</Button>
+                            {
+                                this.state.followed ?
+                                <Button type="default"  size="small" onClick={()=>this.unfollowUser(userInfo._id)}>已关注</Button>
+                                :
+                                <Button type="primary" icon="plus" size="small" onClick={()=>this.followUser(userInfo._id)}>关注</Button>
+                            }
                             {/* <Icon type="heart" className="user-follow" theme="twoTone" twoToneColor="#eb2f96" /> */}
                         </div>
                         <span>{userInfo.nickName||userInfo.account}</span>
@@ -60,6 +91,25 @@ export default class Article extends Component{
         }else{
             message.warning('请登录后操作');
         }
+    }
+
+
+    followUser=(userId)=>{
+        // console.log('follow **',userId)
+        let {follow,checkFollow} = this.props;
+        follow({userId});
+        setTimeout(() => {
+            checkFollow({userId:userId,callback:this.checkfollowCallback})
+        }, 1000);
+    }
+
+    unfollowUser=(userId)=>{
+        // console.log('follow **',userId)
+        let {unfollow,checkFollow} = this.props;
+        unfollow({userId})
+        setTimeout(() => {
+            checkFollow({userId:userId,callback:this.checkfollowCallback})
+        }, 1000);
     }
 
 

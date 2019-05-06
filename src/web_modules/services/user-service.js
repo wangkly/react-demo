@@ -27,3 +27,31 @@ exports.updateUser=(param)=>{
     })
 }
 
+
+exports.followTargetUser=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'follow',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
+
+exports.unfollowTargetUser=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'unfollow',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
+
+
+
+exports.checkfollowTargetUser=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'check-follow',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}

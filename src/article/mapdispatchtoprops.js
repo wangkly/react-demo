@@ -7,6 +7,10 @@ exports.mapDispatchToProps =(dispatch)=>{
         addComments:(param)=>dispatch({type:'AddCommnets',...param}),
         like:(param)=>dispatch({type:'CommentsLike',...param}),
         dislike:(param)=>dispatch({type:'CommentsDislike',...param}),
-        likeArticle:(param)=>dispatch({type:'likeArticle',...param})
+        likeArticle:(param)=>dispatch({type:'likeArticle',...param}),
+        checkFollow:(param)=>dispatch({type:'checkfollow' ,...param}),
+        follow:(param)=>dispatch({type:'follow' ,...param}),
+        unfollow:(param)=>dispatch({type:'unfollow' ,...param})
+
     }
 }

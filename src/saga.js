@@ -4,7 +4,10 @@ import {queryData,delay,postTest,regist,
     likeComments,
     dislikeComments,getUserInfos,
     getUserArticles,updateUserHeadImg,updateUser,
-    likeArticleById
+    likeArticleById,
+    followTargetUser,
+    checkfollowTargetUser,
+    unfollowTargetUser
 } from 'services';
 // import MyFetch from 'myfetch';
 
@@ -154,6 +157,33 @@ function* likeThisArticle(action){
 
 }
 
+//关注这个用户
+function* followUser(action){
+   let {userId,callback} = action;
+   let resp = yield call(followTargetUser,{folUserId:userId})
+   if(callback){
+        callback(resp)
+   }
+}
+
+//取消关注这个用户
+function* unfollowUser(action){
+   let {userId,callback} = action;
+   let resp = yield call(unfollowTargetUser,{folUserId:userId})
+   if(callback){
+        callback(resp)
+   }
+}
+
+//检查当前是否关注了这个用户
+function* checkfollowUser(action){
+   let {userId,callback} = action;
+   let resp = yield call(checkfollowTargetUser,{folUserId:userId})
+    if(callback){
+        callback(resp)
+    }
+}
+
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
@@ -172,6 +202,9 @@ function* mySaga(){
     yield takeLatest('UpdateUserHeadImg',updateUserImg);
     yield takeLatest('UpdateUserInfo',updateUserInfo);
     yield takeLatest('likeArticle',likeThisArticle);
+    yield takeLatest('checkfollow',checkfollowUser);
+    yield takeLatest('follow',followUser);
+    yield takeLatest('unfollow',unfollowUser);
 }
 
 // function* mySaga(){
