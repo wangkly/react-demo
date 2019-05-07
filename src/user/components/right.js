@@ -1,10 +1,7 @@
 import React,{Component} from 'react';
 import {Icon} from 'antd';
-import {Link} from 'react-router-dom';
 
 export default class Right extends Component{
-
-
 
     render(){
 
@@ -13,12 +10,12 @@ export default class Right extends Component{
                 <div className="follow">
                     <div className="follow-panel">
                         <h3>关注了</h3>
-                        <h4><Link to={'/follow'}>0</Link></h4>
+                        <a href="#" onClick={this.selectFollowing}>0</a>
                     </div>
                     <div className="split"></div>
                     <div className="follow-panel">
                         <h3>关注者</h3>
-                        <h4>0</h4>
+                        <a href="#" onClick={this.selectFollower}>0</a>
                     </div>
 
                 </div>
@@ -37,6 +34,18 @@ export default class Right extends Component{
     }
 
 
+    selectFollowing=()=>{
+        let {queryFollows,userInfo,changeTab} = this.props;
+        queryFollows({userId:userInfo._id});
+        changeTab('follows');
+    }
+
+
+    selectFollower =()=>{
+        let {queryFollowers,userInfo,changeTab} = this.props;
+        queryFollowers({userId:userInfo._id});
+        changeTab('follows');
+    }
 
 
 }

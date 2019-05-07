@@ -2,6 +2,9 @@ exports.mapDispatchToProps=(dispatch)=>{
     return{
         getUserInfo:(userId)=>dispatch({type:'UserInfo',userId}),
         getUserArticle:(userId)=>dispatch({type:'GetUserArticle',userId}),
-        updateUserHeadImg:(param)=>dispatch({type:'UpdateUserHeadImg',...param})
+        updateUserHeadImg:(param)=>dispatch({type:'UpdateUserHeadImg',...param}),
+        changeFollowPage:(param)=>dispatch({type:'update-follow-page',...param}),
+        queryFollows:(param)=>dispatch({type:'query-follows',...param}),
+        queryFollowers:(param)=>dispatch({type:'query-followers',...param})
     }
 }

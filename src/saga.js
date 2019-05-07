@@ -188,8 +188,14 @@ function* checkfollowUser(action){
 
 function* queryFollows(action){
    let {userId} = action;
-   let resp = yield call(queryUserfollows,{userId})
-
+   let state = yield select();
+   let followPage = state.getIn(['FollowReducer','followPage'])||{};
+   let {err,res} = yield call(queryUserfollows,{userId,...followPage})
+   if(!err && res.success){
+       yield put({type:'follows-init',payload:res.data.result||[]});
+       followPage.total=res.data.total||0;
+       yield put({type:'setFollowPage',payload:followPage});
+   }
 }
 
 

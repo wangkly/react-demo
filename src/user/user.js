@@ -1,12 +1,18 @@
 import React,{Component} from 'react';
+import { Tabs } from 'antd';
 import Right from './components/right';
-import Article from './components/article';
+import Articles from './components/articles';
 import UserInfo from './components/user-info';
+import Follows from './components/follows';
+const TabPane = Tabs.TabPane;
 
 export default class User extends Component{
 
     constructor(props){
-        super(props)
+        super(props);
+        this.state={
+            activeKey:'article'
+        }
     }
 
     
@@ -47,19 +53,29 @@ export default class User extends Component{
 
                 <div className="user-bottom">
                     <div className="left-panel">
-                        {
-                            articles.map((item,index)=>{
-                                return (<Article key={index} article={item}/>)
-                            })    
-                        }
+                        <Tabs activeKey={this.state.activeKey} onChange={this.changeTab}>
+                            <TabPane tab="文章" key="article">
+                                <Articles articles={articles}/>
+                            </TabPane>
+                            <TabPane tab="关注" key="follows">
+                                <Follows {...this.props}/>
+                            </TabPane>
+                        </Tabs>
                     </div>
                     <div className="right-panel">
-                        <Right />
+                        <Right changeTab={this.changeTab} {...this.props}/>
                     </div>
                 </div>
 
             </div>
         )
+    }
+
+
+    changeTab=(tabkey)=>{
+        this.setState({
+            activeKey:tabkey
+        })
     }
 
 
