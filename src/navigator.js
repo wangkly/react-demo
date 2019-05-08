@@ -83,9 +83,19 @@ export default class MyNavigator extends Component{
                         mode="horizontal">
                             <Menu.Item key="home">
                                 <Link to="/">
-                                <Icon type="home" />Home
+                                <Icon type="home" />首页
                                 </Link>
                             </Menu.Item>
+                            {
+                                login ?
+                                <Menu.Item key="edit">
+                                    <Link to="/editor">
+                                        <Icon type="edit" />写文章
+                                    </Link>
+                                </Menu.Item>
+                                :
+                                null
+                            }
                             <Menu.Item key="todo">
                                 <Link to="/todo">
                                     <Icon type="appstore" />Todos
