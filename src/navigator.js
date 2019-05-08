@@ -154,6 +154,7 @@ export default class MyNavigator extends Component{
             message.success('操作成功');
             setTimeout(()=>{
                 thar.checkIfLogin();
+                location.reload();
             },2000)
         });
     }

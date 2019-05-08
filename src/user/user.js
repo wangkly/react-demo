@@ -49,8 +49,10 @@ export default class User extends Component{
         let {userId} =this.props.match.params;
         return(
             <div className="user-container">
+                {/* <div className="background">
+                    <img src="http://localhost:3001/public/upload/2.jpg" alt="background"/>
+                </div> */}
                 <UserInfo userInfo={userInfo} userId={userId} updateUserHeadImg={updateUserHeadImg}/>
-
                 <div className="user-bottom">
                     <div className="left-panel">
                         <Tabs activeKey={this.state.activeKey} onChange={this.changeTab}>
