@@ -12,10 +12,29 @@ export default class FollowItem extends Component{
                 <div className="item-info">
                     <span>{item.nickName}</span>
                 </div>
-                <div className="item-opt">
-                    <Button type="primary" icon="plus" >关注</Button>
-                </div>
+                {
+                    item.following ?
+                    <div className="item-opt">
+                        <Button type="default" onClick={()=>this.unfollowUser(item._id)}>已关注</Button>
+                    </div>
+                    :
+                    <div className="item-opt">
+                        <Button type="primary" icon="plus" onClick={()=>this.followUser(item._id)}>关注</Button>
+                    </div>
+                }
             </div>
         )
+    }
+
+
+    followUser=(userId)=>{
+        console.log('follow **',userId)
+        let {follow} = this.props;
+        follow({userId});
+    }
+
+    unfollowUser=(userId)=>{
+        let {unfollow} = this.props;
+        unfollow({userId})
     }
 }

@@ -15,7 +15,7 @@ export default class Follows extends Component{
                 {
                     follows.map((item,index)=>{
                         return(
-                            <FollowItem key={index} item={item}/>
+                            <FollowItem key={index} item={item} {...this.props}/>
                         )
                     })
                 }

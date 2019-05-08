@@ -7,6 +7,8 @@ exports.mapDispatchToProps=(dispatch)=>{
         changeFollowerPage:(param)=>dispatch({type:'update-follower-page',...param}),
         queryFollows:(param)=>dispatch({type:'query-follows',...param}),
         queryFollowers:(param)=>dispatch({type:'query-followers',...param}),
-        FollowCount:(userId)=>dispatch({type:'follow-count',userId})
+        FollowCount:(userId)=>dispatch({type:'follow-count',userId}),
+        follow:(param)=>dispatch({type:'follow' ,...param}),
+        unfollow:(param)=>dispatch({type:'unfollow' ,...param})
     }
 }
