@@ -63,6 +63,15 @@ exports.queryUserfollowers=(param)=>{
     })
 }
 
+//查询关注人数和粉丝人数
+exports.queryfollowcount=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'follow-count',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
 
 
 

@@ -1,7 +1,7 @@
 import {queryData,delay,postTest} from './query-service';
 import {login,regist} from './loginregist-service';
 import {saveArticle,getArticle,getComments,saveComments,likeComments,dislikeComments,getUserArticles,likeArticleById} from './article-service';
-import{getUserInfos,updateUserHeadImg,updateUser,followTargetUser,checkfollowTargetUser,unfollowTargetUser,queryUserfollows,queryUserfollowers} from './user-service';
+import{getUserInfos,updateUserHeadImg,updateUser,followTargetUser,checkfollowTargetUser,unfollowTargetUser,queryUserfollows,queryUserfollowers,queryfollowcount} from './user-service';
 export {
     queryData,
     delay,
@@ -23,5 +23,6 @@ export {
     checkfollowTargetUser,
     unfollowTargetUser,
     queryUserfollows,
-    queryUserfollowers
+    queryUserfollowers,
+    queryfollowcount
 }

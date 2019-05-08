@@ -7,7 +7,12 @@ const initialState=Map({
         pageNo:1,
         pageSize:10,
         total:0
-    }   
+    },
+    followerPage:{
+        pageNo:1,
+        pageSize:10,
+        total:0
+    }      
 })
 
 exports.FollowReducer = (state= initialState ,action)=>{
@@ -18,10 +23,16 @@ exports.FollowReducer = (state= initialState ,action)=>{
             return state.set('followers',action.payload);
         case 'setFollowPage':
             return state.set('followPage',action.payload);
+        case 'setFollowerPage':
+            return state.set('followerPage',action.payload);
         case 'update-follow-page':
             let followPage = state.get('followPage');
             followPage.pageNo = action.pageNo
             return state.set('followPage',followPage) 
+        case 'update-follower-page':
+            let followerPage = state.get('followerPage');
+            followerPage.pageNo = action.pageNo
+            return state.set('followerPage',followerPage) 
         default:
             return state
     }

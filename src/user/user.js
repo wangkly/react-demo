@@ -3,7 +3,7 @@ import { Tabs } from 'antd';
 import Right from './components/right';
 import Articles from './components/articles';
 import UserInfo from './components/user-info';
-import Follows from './components/follows';
+import FollowWrap from './components/follow-wrap';
 const TabPane = Tabs.TabPane;
 
 export default class User extends Component{
@@ -17,11 +17,11 @@ export default class User extends Component{
 
     
     componentDidMount(){
-        let {getUserInfo,getUserArticle} = this.props;
+        let {getUserInfo,getUserArticle,FollowCount} = this.props;
         let {userId} =this.props.match.params;
         getUserInfo(userId);
         getUserArticle(userId);
-
+        FollowCount(userId)
         let reactContent = document.getElementById('react-content');
         reactContent && reactContent.addEventListener('scroll',this.reactContentScroll)
     }
@@ -58,7 +58,7 @@ export default class User extends Component{
                                 <Articles articles={articles}/>
                             </TabPane>
                             <TabPane tab="关注" key="follows">
-                                <Follows {...this.props}/>
+                                <FollowWrap {...this.props}/>
                             </TabPane>
                         </Tabs>
                     </div>

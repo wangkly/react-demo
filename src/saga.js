@@ -9,7 +9,8 @@ import {queryData,delay,postTest,regist,
     checkfollowTargetUser,
     unfollowTargetUser,
     queryUserfollows,
-    queryUserfollowers
+    queryUserfollowers,
+    queryfollowcount
 } from 'services';
 // import MyFetch from 'myfetch';
 
@@ -202,8 +203,30 @@ function* queryFollows(action){
 
 function* queryFollowers(action){
     let {userId} = action;
-    let resp = yield call(queryUserfollowers,{userId})
-    
+    let state = yield select();
+    let followerPage = state.getIn(['FollowReducer','followerPage'])||{};
+    let {err,res} = yield call(queryUserfollowers,{userId,...followerPage});
+    if(!err && res.success){
+        yield put({type:'followers-init',payload:res.data.result||[]});
+        followerPage.total=res.data.total||0;
+        yield put({type:'setFollowerPage',payload:followerPage});
+    }
+}
+
+function* countFollows(action){
+    let {userId} = action;
+    let state = yield select();
+    let followPage = state.getIn(['FollowReducer','followPage'])||{};
+    let followerPage = state.getIn(['FollowReducer','followerPage'])||{};
+    let {err,res}= yield call(queryfollowcount,{userId})
+    if(!err && res.success){
+        let {following = 0,follower = 0} = res.data;
+        followPage.total=following||0;
+        followerPage.total=follower||0;
+        yield put({type:'setFollowPage',payload:followPage});
+        yield put({type:'setFollowerPage',payload:followerPage})
+    }
+
 }
 
 
@@ -227,6 +250,7 @@ function* mySaga(){
     yield takeLatest('checkfollow',checkfollowUser);
     yield takeLatest('follow',followUser);
     yield takeLatest('unfollow',unfollowUser);
+    yield takeLatest('follow-count',countFollows);
     yield takeLatest('query-follows',queryFollows);
     yield takeLatest('query-followers',queryFollowers);
 }

@@ -4,6 +4,7 @@ exports.mapStateToProps =(state)=>{
         articles:state.getIn(['userReducer','articles']),
         follows:state.getIn(['FollowReducer','follows']),
         followPage:state.getIn(['FollowReducer','followPage']),
-        followers:state.getIn(['FollowReducer','followers'])
+        followers:state.getIn(['FollowReducer','followers']),
+        followerPage:state.getIn(['FollowReducer','followerPage']),
     }
 }
