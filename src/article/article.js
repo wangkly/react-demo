@@ -100,7 +100,7 @@ export default class Article extends Component{
         follow({userId});
         setTimeout(() => {
             checkFollow({userId:userId,callback:this.checkfollowCallback})
-        }, 1000);
+        }, 800);
     }
 
     unfollowUser=(userId)=>{
@@ -109,7 +109,7 @@ export default class Article extends Component{
         unfollow({userId})
         setTimeout(() => {
             checkFollow({userId:userId,callback:this.checkfollowCallback})
-        }, 1000);
+        }, 800);
     }
 
 

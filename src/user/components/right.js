@@ -20,14 +20,14 @@ export default class Right extends Component{
 
                 </div>
 
-                {/* <div className="user-opt">
+                <div className="user-opt">
                     <div className="opt-panel">
-                    <Icon type="file-add" className="icon-write"/>
+                    <Icon type="star" className="icon-write"/>
                        <br/>
-                       <span>写文章</span>
+                       <span>我的收藏</span>
                     </div>
 
-                </div> */}
+                </div>
 
             </div>
         )
@@ -38,7 +38,9 @@ export default class Right extends Component{
         let {queryFollows,userInfo,changeTab} = this.props;
         // queryFollows({userId:userInfo._id});
         changeTab('follows');
-        emitter.emit('changeTab','follows');
+        setTimeout(()=>{
+            emitter.emit('changeTab','follows');
+        },300);
     }
 
 
@@ -46,7 +48,9 @@ export default class Right extends Component{
         let {queryFollowers,userInfo,changeTab} = this.props;
         // queryFollowers({userId:userInfo._id});
         changeTab('follows');
-        emitter.emit('changeTab','followers');
+        setTimeout(()=>{
+            emitter.emit('changeTab','followers');
+        },300);
     }
 
 

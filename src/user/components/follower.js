@@ -15,7 +15,7 @@ export default class Followers extends Component{
                 {
                     followers.map((item,index)=>{
                         return(
-                            <FollowItem key={index} item={item}/>
+                            <FollowItem key={index} item={item} {...this.props} refreshData={this.refreshData}/>
                         )
                     })
                 }
@@ -30,6 +30,12 @@ export default class Followers extends Component{
     changePage=(page)=>{
         let {changeFollowerPage,queryFollowers,userInfo} = this.props;
         changeFollowerPage({pageNo:page});
+        queryFollowers({userId:userInfo._id});
+    }
+
+    //刷新当前页的数据
+    refreshData=()=>{
+        let {queryFollowers,userInfo} = this.props
         queryFollowers({userId:userInfo._id});
     }
 

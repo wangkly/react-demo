@@ -28,13 +28,18 @@ export default class FollowItem extends Component{
 
 
     followUser=(userId)=>{
-        console.log('follow **',userId)
         let {follow} = this.props;
         follow({userId});
+        setTimeout(()=>{
+            this.props.refreshData();
+        },800)
     }
 
     unfollowUser=(userId)=>{
         let {unfollow} = this.props;
-        unfollow({userId})
+        unfollow({userId});
+        setTimeout(()=>{
+            this.props.refreshData();
+        },800)
     }
 }
