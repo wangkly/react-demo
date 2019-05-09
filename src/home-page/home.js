@@ -40,16 +40,22 @@ export default class Home extends Component{
 
     render(){
         let {banners} = this.props;
+        console.log('home **banners',banners)
         return(
             <div  className="main-container">
                 <div className="banner">
                     <Carousel  afterChange={()=>this.onChange} >
                         {
-                            banners.map((banner)=>{
-                                return(<div   key={banner.id}>
-                                    <span>{banner.context}</span>
-                                    {/* <a href={`/${banner.href}`} target="_blank">click me</a> */}
-                                </div>) 
+                            banners && banners.map((banner,index)=>{
+                                return(
+                                    <a key={index} href={`/article/${banner.articleId}`}>
+                                        <div className="banner-img" key={banner._id}>
+                                            <img src={banner.cover} alt="article_cover"/>
+                                            {/* <span>{banner.context}</span> */}
+                                            {/* <a href={`/${banner.href}`} target="_blank">click me</a> */}
+                                        </div>
+                                    </a>
+                                ) 
                             })
                         }
                     </Carousel>

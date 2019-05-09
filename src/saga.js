@@ -24,8 +24,10 @@ function* beforeAdd(action){
 
 
 function* initBanner(){
-    let banners = yield call(queryData,{url:'init-banner'});
-    yield put({type:'initBanners',payload:banners.res})
+    let {err,res} = yield call(queryData,{url:'init-banner'});
+    if(!err && res.status){
+        yield put({type:'initBanners',payload:res.data||[]})
+    }
 }
 
 
