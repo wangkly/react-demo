@@ -11,7 +11,8 @@ import {queryData,delay,postTest,regist,
     queryUserfollows,
     queryUserfollowers,
     queryfollowcount,
-    getLikeFavoStatus
+    getLikeFavoStatus,
+    addFavoByArticleId
 } from 'services';
 // import MyFetch from 'myfetch';
 
@@ -166,6 +167,15 @@ function* likeThisArticle(action){
     }
 }
 
+//添加收藏
+function* addFavorite(action){
+    let {articleId} = action;
+    let resp =yield call(addFavoByArticleId,{articleId})
+    if(action.callback){
+        action.callback(resp)
+    }
+}
+
 //关注这个用户
 function* followUser(action){
    let {userId,callback} = action;
@@ -262,6 +272,7 @@ function* mySaga(){
     yield takeLatest('UpdateUserHeadImg',updateUserImg);
     yield takeLatest('UpdateUserInfo',updateUserInfo);
     yield takeLatest('likeArticle',likeThisArticle);
+    yield takeLatest('addFavorite',addFavorite);
     yield takeLatest('likefavostatus',likeFavoStatus);
     yield takeLatest('checkfollow',checkfollowUser);
     yield takeLatest('follow',followUser);

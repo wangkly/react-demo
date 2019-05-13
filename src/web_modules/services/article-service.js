@@ -26,6 +26,14 @@ exports.likeArticleById = (param)=>{
     })
 }
 
+exports.addFavoByArticleId =(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'add-favo',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+
 
 exports.getUserArticles =(param)=>{
     return new Promise((resolve)=>{

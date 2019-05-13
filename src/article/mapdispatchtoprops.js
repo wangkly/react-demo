@@ -9,7 +9,7 @@ exports.mapDispatchToProps =(dispatch)=>{
         dislike:(param)=>dispatch({type:'CommentsDislike',...param}),
         likeArticle:(param)=>dispatch({type:'likeArticle',...param}),
         checkFollow:(param)=>dispatch({type:'checkfollow' ,...param}),
-        // getLikeAndFavoriteStatus:(id)=>dispatch({type:'likefavostatus',id}),
+        addFavorite:(param)=>dispatch({type:'addFavorite',...param}),
         follow:(param)=>dispatch({type:'follow' ,...param}),
         unfollow:(param)=>dispatch({type:'unfollow' ,...param})
 

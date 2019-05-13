@@ -71,8 +71,14 @@ export default class Article extends Component{
                 </div>
                 <div  className="braft-output-content" dangerouslySetInnerHTML={{__html: htmlString }}></div>
                 <div className="bottom-row">
-                    <Button type="default" icon="heart" size="large" onClick={this.like}>{ likefavo && likefavo.like ? '已赞': '点个赞'}</Button>
-                    <Button type="default" className="bottom-btn" icon="star" size="large" onClick={this.like}>{likefavo && likefavo.favorite ? '已收藏':'收藏'}</Button>
+                    <Button type="primary" size="large" onClick={this.like}>
+                    {/* <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" /> */}
+                    <Icon type="heart" theme="filled" style={{fontSize:18,'color':'#FF0000'}} />
+                    { likefavo && likefavo.like ? '已赞': '点个赞'}</Button>
+                    <Button type="default" className="bottom-btn" size="large" onClick={this._addFavorite}>
+                    <Icon type="star" theme="filled" style={{fontSize:18,'color':'#DAA520'}} />
+                    {likefavo && likefavo.favorite ? '已收藏':'收藏'}
+                    </Button>
                 </div>
                 <Comments {...this.props}/>  
             </div>
@@ -94,10 +100,20 @@ export default class Article extends Component{
         }
     }
 
+
+    _addFavorite =()=>{
+        let {addFavorite,article} = this.props;
+        addFavorite({articleId:article._id,callback:this._callback})
+    }
+
     _callback=(resp)=>{
         let {err,res} = resp;
         if(!res.success){
             message.warning(`${res.errMsg}`);
+        }else{
+            let {init} = this.props;
+            let {aid} =this.props.match.params;
+            init(aid)
         }
     }
 
