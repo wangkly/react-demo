@@ -43,7 +43,7 @@ export default class Article extends Component{
 
     render(){
 
-        let {article,userInfo} = this.props;
+        let {article,userInfo,likefavo} = this.props;
         let  editorState = BraftEditor.createEditorState(article.content);
         let htmlString = editorState.toHTML()
         return(
@@ -71,7 +71,8 @@ export default class Article extends Component{
                 </div>
                 <div  className="braft-output-content" dangerouslySetInnerHTML={{__html: htmlString }}></div>
                 <div className="bottom-row">
-                    <Button type="primary" icon="heart" size="large" onClick={this.like}>点个赞</Button>
+                    <Button type="default" icon="heart" size="large" onClick={this.like}>{ likefavo && likefavo.like ? '已赞': '点个赞'}</Button>
+                    <Button type="default" className="bottom-btn" icon="star" size="large" onClick={this.like}>{likefavo && likefavo.favorite ? '已收藏':'收藏'}</Button>
                 </div>
                 <Comments {...this.props}/>  
             </div>
@@ -86,10 +87,17 @@ export default class Article extends Component{
         let {err,res} = await MyFetch({url:'checkIfLogin'});
         if(!err && res.success){
 
-           await likeArticle({articleId:article._id})
+           await likeArticle({articleId:article._id,callback:this._callback})
 
         }else{
             message.warning('请登录后操作');
+        }
+    }
+
+    _callback=(resp)=>{
+        let {err,res} = resp;
+        if(!res.success){
+            message.warning(`${res.errMsg}`);
         }
     }
 

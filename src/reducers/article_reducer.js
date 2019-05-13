@@ -3,7 +3,8 @@ import {Map} from 'immutable';
 const initialState=Map({
     article:{},
     comments:[],
-    userInfo:{}
+    userInfo:{},
+    likefavo:{}
 })
 
 exports.ArticleReducer = (state= initialState ,action)=>{
@@ -14,7 +15,9 @@ exports.ArticleReducer = (state= initialState ,action)=>{
         case 'comments-set':
             return state.set('comments',action.payload);
         case 'article-user':
-        return state.set('userInfo',action.payload)
+        return state.set('userInfo',action.payload);
+        case 'init-likefavo':
+        return state.set('likefavo',action.payload);
 
         default:
             return state

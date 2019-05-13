@@ -10,7 +10,8 @@ import {queryData,delay,postTest,regist,
     unfollowTargetUser,
     queryUserfollows,
     queryUserfollowers,
-    queryfollowcount
+    queryfollowcount,
+    getLikeFavoStatus
 } from 'services';
 // import MyFetch from 'myfetch';
 
@@ -71,6 +72,7 @@ function* getArticleById(action){
     let resp = yield call(getArticle,action);
     yield put({type:'article-init',payload:resp.res.data});
     yield put({type:'LoadComments',id:action.id});
+    yield put({type:'likefavostatus',id:action.id})
     //查文章的作者
     let userResp = yield call(getUserInfos,{userId:resp.res.data.userId})
     yield put({type:'article-user',payload:userResp.res.data});
@@ -159,7 +161,9 @@ function* updateUserInfo(action){
 
 function* likeThisArticle(action){
     let {err,res} = yield call(likeArticleById,action);
-
+    if(action.callback){
+        action.callback({err,res})
+    }
 }
 
 //关注这个用户
@@ -231,6 +235,15 @@ function* countFollows(action){
 
 }
 
+//获取当前登录用户对该文章的点赞和收藏情况
+function* likeFavoStatus(action){
+    let {id} = action;
+    let {err,res} =yield call(getLikeFavoStatus,{articleId:id});
+    if(!err && res.success){
+        yield put({type:'init-likefavo',payload:res.data})
+    }
+}
+
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
@@ -249,6 +262,7 @@ function* mySaga(){
     yield takeLatest('UpdateUserHeadImg',updateUserImg);
     yield takeLatest('UpdateUserInfo',updateUserInfo);
     yield takeLatest('likeArticle',likeThisArticle);
+    yield takeLatest('likefavostatus',likeFavoStatus);
     yield takeLatest('checkfollow',checkfollowUser);
     yield takeLatest('follow',followUser);
     yield takeLatest('unfollow',unfollowUser);

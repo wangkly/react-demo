@@ -82,3 +82,15 @@ exports.checkfollowTargetUser=(param)=>{
         })
     })
 }
+
+
+/**
+ * 获取登录用户对文章的点赞和收藏情况
+ */
+exports.getLikeFavoStatus=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'like-favo',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
