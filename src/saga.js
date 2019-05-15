@@ -12,7 +12,8 @@ import {queryData,delay,postTest,regist,
     queryUserfollowers,
     queryfollowcount,
     getLikeFavoStatus,
-    addFavoByArticleId
+    addFavoByArticleId,
+    getUserFavo
 } from 'services';
 // import MyFetch from 'myfetch';
 
@@ -120,7 +121,7 @@ function* getUserInfo(action){
 function* getArticleByUser(action){
     let state = yield select();
     let pageInfo = state.getIn(['userReducer','pageInfo'])||{};
-    let articles = state.getIn(['userReducer','articles'])||[];
+    // let articles = state.getIn(['userReducer','articles'])||[];
     let param ={
         userId:action.userId
     }
@@ -128,12 +129,11 @@ function* getArticleByUser(action){
     let {err,res}  = yield call(getUserArticles,Object.assign(param,pageInfo));
     
     if(!err && res.success){
-        articles = articles.concat(res.data);
-        yield put({type:'user-article-init',payload:articles})
-        if(res.data.length > 0){
-            pageInfo.pageNo +=1;
-            yield put({type:"userSetPageInfo",payload:pageInfo })
-        }
+        // articles = articles.concat(res.data);
+        pageInfo.total = res.data.total;
+        console.log('saga ** pageInfo',pageInfo)
+        yield put({type:'user-article-init',payload:res.data.articles})
+        yield put({type:"userSetPageInfo",payload:pageInfo })
 
     }
 
@@ -254,6 +254,19 @@ function* likeFavoStatus(action){
     }
 }
 
+//查询用户收藏
+function* queryUserFavo(action){
+    let {userId} = action;
+    let state = yield select();
+    let favoPageInfo = state.getIn(['userReducer','favoPageInfo'])||{}
+    let {err,res} = yield call(getUserFavo,{userId,...favoPageInfo});
+    if(!err && res.success){
+        yield put({type:'favorites-init',payload:res.data.data});
+        favoPageInfo.total = res.data.total;
+        yield put({type:'setFavoPageInfo',payload:favoPageInfo})
+    }
+
+}
 
 function* mySaga(){
     yield takeEvery("beforeADD",beforeAdd)
@@ -273,6 +286,7 @@ function* mySaga(){
     yield takeLatest('UpdateUserInfo',updateUserInfo);
     yield takeLatest('likeArticle',likeThisArticle);
     yield takeLatest('addFavorite',addFavorite);
+    yield takeLatest('query-favo',queryUserFavo);
     yield takeLatest('likefavostatus',likeFavoStatus);
     yield takeLatest('checkfollow',checkfollowUser);
     yield takeLatest('follow',followUser);

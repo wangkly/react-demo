@@ -24,7 +24,7 @@ export default class Right extends Component{
                     <div className="opt-panel">
                     <Icon type="star" className="icon-write"/>
                        <br/>
-                       <span>我的收藏</span>
+                       <a onClick={this.queryUserFavos}>我的收藏</a>
                     </div>
 
                 </div>
@@ -51,6 +51,12 @@ export default class Right extends Component{
         setTimeout(()=>{
             emitter.emit('changeTab','followers');
         },300);
+    }
+
+    queryUserFavos=()=>{
+        let {queryFavo,userInfo,changeTab} = this.props;
+        queryFavo({userId:userInfo._id})
+        changeTab('favorite');
     }
 
 

@@ -4,7 +4,7 @@ import {saveArticle,getArticle,getComments,saveComments,
     likeComments,dislikeComments,getUserArticles,likeArticleById,addFavoByArticleId} from './article-service';
 import{getUserInfos,updateUserHeadImg,updateUser,followTargetUser,
     checkfollowTargetUser,unfollowTargetUser,queryUserfollows,
-    queryUserfollowers,queryfollowcount,getLikeFavoStatus} from './user-service';
+    queryUserfollowers,queryfollowcount,getLikeFavoStatus,getUserFavo} from './user-service';
 export {
     queryData,
     delay,
@@ -29,5 +29,6 @@ export {
     queryUserfollowers,
     queryfollowcount,
     getLikeFavoStatus,
-    addFavoByArticleId
+    addFavoByArticleId,
+    getUserFavo
 }

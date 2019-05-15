@@ -94,3 +94,15 @@ exports.getLikeFavoStatus=(param)=>{
         })
     })
 }
+
+/**
+ * 查询用户收藏
+ */
+exports.getUserFavo=(param)=>{
+    return new Promise((resolve)=>{
+        MyFetch({url:'query-favo',method:'POST',body:param}).then((res)=>{
+            resolve(res);
+        })
+    })
+}
+

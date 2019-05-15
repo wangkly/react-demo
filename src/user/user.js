@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Tabs } from 'antd';
 import Right from './components/right';
 import Articles from './components/articles';
+import Favorites from './components/favorites';
 import UserInfo from './components/user-info';
 import FollowWrap from './components/follow-wrap';
 const TabPane = Tabs.TabPane;
@@ -22,25 +23,25 @@ export default class User extends Component{
         getUserInfo(userId);
         getUserArticle(userId);
         FollowCount(userId)
-        let reactContent = document.getElementById('react-content');
-        reactContent && reactContent.addEventListener('scroll',this.reactContentScroll)
+        // let reactContent = document.getElementById('react-content');
+        // reactContent && reactContent.addEventListener('scroll',this.reactContentScroll)
     }
 
 
     componentWillUnmount(){
-        let reactContent = document.getElementById('react-content');
-        reactContent && reactContent.removeEventListener('scroll',this.reactContentScroll)
+        // let reactContent = document.getElementById('react-content');
+        // reactContent && reactContent.removeEventListener('scroll',this.reactContentScroll)
     }
 
 
-    reactContentScroll = ()=>{
-        let {getUserArticle} = this.props;
-        let {userId} =this.props.match.params;
-        let reactContent = document.getElementById('react-content');
-        if(reactContent.scrollTop+document.body.clientHeight + 1 > reactContent.scrollHeight){//滚动到距底部100
-            getUserArticle(userId);
-        }
-    }
+    // reactContentScroll = ()=>{
+    //     let {getUserArticle} = this.props;
+    //     let {userId} =this.props.match.params;
+    //     let reactContent = document.getElementById('react-content');
+    //     if(reactContent.scrollTop+document.body.clientHeight + 1 > reactContent.scrollHeight){//滚动到距底部100
+    //         getUserArticle(userId);
+    //     }
+    // }
 
 
 
@@ -57,10 +58,13 @@ export default class User extends Component{
                     <div className="left-panel">
                         <Tabs activeKey={this.state.activeKey} onChange={this.changeTab}>
                             <TabPane tab="文章" key="article">
-                                <Articles articles={articles}/>
+                                <Articles {...this.props}/>
                             </TabPane>
                             <TabPane tab="关注" key="follows">
                                 <FollowWrap {...this.props}/>
+                            </TabPane>
+                            <TabPane tab="收藏" key="favorite">
+                                <Favorites {...this.props}/>
                             </TabPane>
                         </Tabs>
                     </div>
