@@ -55,8 +55,10 @@ export default class Right extends Component{
 
     queryUserFavos=()=>{
         let {queryFavo,userInfo,changeTab} = this.props;
-        queryFavo({userId:userInfo._id})
-        changeTab('favorite');
+        queryFavo({userId:userInfo._id});
+        setTimeout(()=>{
+            changeTab('favorite');
+        },300)
     }
 
 
