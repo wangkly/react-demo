@@ -1,5 +1,6 @@
 var path =require('path');
 require("babel-polyfill");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -28,7 +29,11 @@ module.exports={
     plugins:[
         new ExtractTextPlugin({
 			filename: 'bundle-[name].css', disable: false, allChunks: true
-		}),
+        }),
+        new webpack.DefinePlugin({
+            'SERVER_HOST': JSON.stringify('http://localhost:3001/')
+        }),
+
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './index.ejs'

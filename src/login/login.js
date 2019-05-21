@@ -11,7 +11,7 @@ class Login extends Component{
             <div className="login-container">
             <div className="login-panel">
             <div>
-                <img className="logo " src="/logo.png"  />
+                <img className="logo " src={`${SERVER_HOST}public/logo.png`}  />
             </div>
                 <Form   onSubmit={this.handleFormSubmit} style={{margin: '20px 0'}} >
                         <Form.Item>

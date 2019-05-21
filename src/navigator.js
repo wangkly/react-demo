@@ -73,7 +73,7 @@ export default class MyNavigator extends Component{
             <div className="top">
                 <div className="top-menu clearfix">
                 <div className="logo">
-                    <img src="/logo.png"  />
+                    <img src={`${SERVER_HOST}public/logo.png`}  />
                 </div>
                 <div className="menu-bar">
                         <Menu
